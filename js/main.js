@@ -1,5 +1,5 @@
 function getRandomIntInclusive(min, max) {
-  if (( min > max) || (min < 0 || max < 0)){
+  if (( min >= max) || (min < 0 || max < 0)){
     return !1;
   }
 
