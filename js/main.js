@@ -1,6 +1,6 @@
 function getRandomIntInclusive(min, max) {
   if (( min >= max) || (min < 0 || max < 0)){
-    return !1;
+    return false;
   }
 
   min = Math.ceil(min);
@@ -12,8 +12,8 @@ getRandomIntInclusive(5.7, 9);
 
 function checkLengthString(checkString, maxLength = 140) {
   if (checkString.length <= maxLength) {
-    return !0;
+    return true;
   }
-  return !1;
+  return false;
 }
 checkLengthString('длина строки');
