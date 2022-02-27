@@ -16,7 +16,7 @@ const MESSAGE_COMMENT = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
-const collectionDescriptions = 25;
+const COLLECTION_DESCRIPTIONS = 25;
 function getRandomIntInclusive(min, max) {
   if ((min >= max) || (min < 0 || max < 0)) {
     return 0;
@@ -60,5 +60,5 @@ const createDescriptionsFoto = () => ({
   likes: getRandomIntInclusive(15, 200),
   comments: Array.from({length:6}, createComments),
 });
-const collectionDescriptionsFoto = Array.from({ length: collectionDescriptions }, createDescriptionsFoto);
+const collectionDescriptionsFoto = Array.from({ length: COLLECTION_DESCRIPTIONS }, createDescriptionsFoto);
 
