@@ -32,33 +32,27 @@ function checkLengthString(checkString, maxLength = 140) {
 checkLengthString('строка');
 const getRandomArrayElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
 
-let sumIndexFoto = 0;
-function getIndexFoto(n) {
-  sumIndexFoto = sumIndexFoto >= n ? 1 : sumIndexFoto += 1;
-  return sumIndexFoto;
+
+function makeCount() {
+  let sumCount = 0;
+  return  (n) => {
+    sumCount = sumCount >= n ? 1 : sumCount += 1;
+    return sumCount;
+  };
 }
-let sumIdComments = 0;
-function getIdComments(m) {
-  sumIdComments = sumIdComments >= m ? 1 : sumIdComments += 1;
-  return sumIdComments;
-}
-let sumIdDescriptions = 0;
-function getIdDescriptions(i) {
-  sumIdDescriptions = sumIdDescriptions >= i ? 1 : sumIdDescriptions += 1;
-  return sumIdDescriptions;
-}
+const makeCountValue = makeCount();
 const createComments = () => ({
-  id: getIdComments(150),
+  id: makeCountValue(150),
   avatar: `img/avatar-${getRandomIntInclusive(1, 6)}.svg`,
   message: getRandomArrayElement(MESSAGE_COMMENT),
   name: getRandomArrayElement(NAMES),
 });
 const createDescriptionsFoto = () => ({
-  id: getIdDescriptions(25),
-  url: `photos/${getIndexFoto(25)}.jpg`,
+  id: makeCountValue(25),
+  url: `photos/${makeCountValue(25)}.jpg`,
   description: 'Это мы на Гаваях)',
   likes: getRandomIntInclusive(15, 200),
   comments: Array.from({length:6}, createComments),
 });
 const collectionDescriptionsFoto = Array.from({ length: COLLECTION_DESCRIPTIONS }, createDescriptionsFoto);
-
+window.console.log(collectionDescriptionsFoto);
