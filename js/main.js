@@ -35,21 +35,29 @@ const getRandomArrayElement = (element) => element[getRandomIntInclusive(0, elem
 
 function makeCount() {
   let sumCount = 0;
-  return  (n) => {
-    sumCount = sumCount >= n ? 1 : sumCount += 1;
-    return sumCount;
-  };
+  return  (n) => sumCount >= n ? 1 : ++sumCount;
 }
-const makeCountValue = makeCount();
+
+// функция до сокр.
+// function makeCount() {
+//   let sumCount = 0;
+//   return  (n) => {
+//     sumCount = sumCount >= n ? 1 : ++sumCount;
+//     return sumCount;
+//   };
+// }
+const makeCountIdComment = makeCount();
+const makeCountIdDescription = makeCount();
+const makeCountValueFoto = makeCount();
 const createComments = () => ({
-  id: makeCountValue(150),
+  id: makeCountIdComment(150),
   avatar: `img/avatar-${getRandomIntInclusive(1, 6)}.svg`,
   message: getRandomArrayElement(MESSAGE_COMMENT),
   name: getRandomArrayElement(NAMES),
 });
 const createDescriptionsFoto = () => ({
-  id: makeCountValue(25),
-  url: `photos/${makeCountValue(25)}.jpg`,
+  id: makeCountIdDescription(25),
+  url: `photos/${makeCountValueFoto(25)}.jpg`,
   description: 'Это мы на Гаваях)',
   likes: getRandomIntInclusive(15, 200),
   comments: Array.from({length:6}, createComments),
