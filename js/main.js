@@ -1,2 +1,2 @@
-import {collectionDescriptionsFoto} from './data.js';
-window.console.log(collectionDescriptionsFoto());
+import {getMockPhotos} from './data.js';
+window.console.log(getMockPhotos());
