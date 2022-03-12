@@ -1,6 +1,6 @@
 function getRandomIntInclusive(min, max) {
   if ((min >= max) || (min < 0 || max < 0)) {
-    return null;
+    return 0;
   }
   min = Math.ceil(min);
   max = Math.floor(max);
