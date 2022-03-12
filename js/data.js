@@ -1,4 +1,4 @@
-import * as util from './util.js';
+import {getNextCommentId, getRandomArrayElement, getRandomIntInclusive} from './util.js';
 const NAMES = [
   'Иван',
   'Хуан Себастьян',
@@ -9,7 +9,7 @@ const NAMES = [
   'Люпита',
   'Вашингтон',
 ];
-const MESSAGE_COMMENT = [
+const MESSAGE_COMMENTS = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -23,19 +23,19 @@ function makeCount() {
   return  (n) => sumCount >= n ? 1 : ++sumCount;
 }
 const makeCountIdDescription = makeCount();
-const makeCountValuePhotos = makeCount();
-const createComments = () => ({
-  id: util.getNextCommentId(),
-  avatar: `img/avatar-${util.getRandomIntInclusive(1, 6)}.svg`,
-  message: util.getRandomArrayElement(MESSAGE_COMMENT),
-  name: util.getRandomArrayElement(NAMES),
+const makeCountValuePhoto = makeCount();
+const createComment = () => ({
+  id: getNextCommentId(),
+  avatar: `img/avatar-${getRandomIntInclusive(1, 6)}.svg`,
+  message: getRandomArrayElement(MESSAGE_COMMENTS),
+  name: getRandomArrayElement(NAMES),
 });
 const createDescriptionsPhotos = () => ({
   id: makeCountIdDescription(25),
-  url: `photos/${makeCountValuePhotos(25)}.jpg`,
+  url: `photos/${makeCountValuePhoto(25)}.jpg`,
   description: 'Это мы на Гаваях)',
-  likes: util.getRandomIntInclusive(15, 200),
-  comments: Array.from({length:6}, createComments),
+  likes: getRandomIntInclusive(15, 200),
+  comments: Array.from({length:6}, createComment),
 });
 const getMockPhotos = () => Array.from({ length: COLLECTION_DESCRIPTIONS }, createDescriptionsPhotos);
 export {getMockPhotos};
