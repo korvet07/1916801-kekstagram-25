@@ -8,7 +8,6 @@ photosMoreUsers.forEach(({url, likes, comments}) =>{
   pictureTemplateElement.querySelector('.picture__img').setAttribute('src', url);
   pictureTemplateElement.querySelector('.picture__likes').textContent = likes;
   pictureTemplateElement.querySelector('.picture__comments').textContent = comments.length;
-  window.console.log(pictureTemplateElement);
   elementGalleryPhotosFragment.append(pictureTemplateElement);
 
 });
