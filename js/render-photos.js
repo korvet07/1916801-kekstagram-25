@@ -10,8 +10,8 @@ const renderElement = (item) => {
   return element;
 };
 export const photosMoreUsers = getMockPhotos();
-export const renderPhotos= (arrPhotos)=>{
-  arrPhotos.forEach((item) =>{
+export const renderPhotos= (photos) => {
+  photos.forEach((item) => {
     elementFragment.append(renderElement(item));
   });
   return сontainer.append(elementFragment);
