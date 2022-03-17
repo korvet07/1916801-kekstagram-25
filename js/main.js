@@ -1,2 +1,3 @@
-import {getMockPhotos} from './data.js';
-window.console.log(getMockPhotos());
+import  './data.js';
+import './preview-photos.js';
+
