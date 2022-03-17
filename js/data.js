@@ -37,5 +37,5 @@ const createDescriptionsPhotos = () => ({
   likes: getRandomIntInclusive(15, 200),
   comments: Array.from({length:6}, createComment),
 });
-const getMockPhotos = () => Array.from({ length: COLLECTION_DESCRIPTIONS }, createDescriptionsPhotos);
-export {getMockPhotos};
+export const getMockPhotos = () => Array.from({ length: COLLECTION_DESCRIPTIONS }, createDescriptionsPhotos);
+
