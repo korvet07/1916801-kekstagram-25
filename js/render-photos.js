@@ -1,6 +1,5 @@
-import {getMockPhotos} from './data.js';
 const template = document.querySelector('#picture').content.querySelector('.picture');
-const сontainer = document.querySelector('.pictures');
+const container = document.querySelector('.pictures');
 const elementFragment = document.createDocumentFragment();
 const renderElement = (item) => {
   const element = template.cloneNode(true);
@@ -9,12 +8,12 @@ const renderElement = (item) => {
   element.querySelector('.picture__comments').textContent = item.comments.length;
   return element;
 };
-export const photosMoreUsers = getMockPhotos();
-export const renderPhotos= (photos) => {
-  photos.forEach((item) => {
+
+export const renderPhotos= (items) => {
+  items.forEach((item) => {
     elementFragment.append(renderElement(item));
   });
-  return сontainer.append(elementFragment);
+  return container.append(elementFragment);
 };
 
 
