@@ -1,2 +1,6 @@
 import {getMockPhotos} from './data.js';
-window.console.log(getMockPhotos());
+import {renderPhotos} from './render-photos.js';
+const photosMoreUsers = getMockPhotos();
+renderPhotos(photosMoreUsers);
+
+// import './full-screen-photos';

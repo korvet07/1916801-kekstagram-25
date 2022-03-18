@@ -12,7 +12,7 @@ function checkLengthString(checkString, maxLength = 140) {
 }
 checkLengthString('строка');
 
-function createRandomCommentId (min, max) {
+const createRandomCommentId =(min, max) =>{
   const previousValues = [];
   return function () {
     let currentValue = getRandomIntInclusive(min, max);
@@ -26,7 +26,7 @@ function createRandomCommentId (min, max) {
     previousValues.push(currentValue);
     return currentValue;
   };
-}
+};
 
 export const getNextCommentId = createRandomCommentId (1, 150);
 export const getRandomArrayElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
