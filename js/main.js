@@ -1,6 +1,6 @@
-import {getMockPhotos} from './data.js';
-import {renderPhotos} from './render-photos.js';
-const photosMoreUsers = getMockPhotos();
-renderPhotos(photosMoreUsers);
+import  './data.js';
+import  './render-photos.js';
+import './full-screen-photos.js';
 
-// import './full-screen-photos';
+// reviewBigPhoto(photosMoreUsers);
+
