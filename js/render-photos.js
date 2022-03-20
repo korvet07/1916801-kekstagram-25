@@ -1,19 +1,19 @@
-import { openBigPhoto } from './full-screen-photos.js';
+import { openBigPhoto } from './event-handler.js';
 const template = document.querySelector('#picture').content.querySelector('.picture');
 const container = document.querySelector('.pictures');
 const elementFragment = document.createDocumentFragment();
-const renderElement = (item) => {
-  const element = template.cloneNode(true);
-  element.querySelector('.picture__img').setAttribute('src', item.url);
-  element.querySelector('.picture__likes').textContent = item.likes;
-  element.querySelector('.picture__comments').textContent = item.comments.length;
-  return element;
+const renderThumbnail = (item) => {
+  const thumbnail = template.cloneNode(true);
+  thumbnail.querySelector('.picture__img').setAttribute('src', item.url);
+  thumbnail.querySelector('.picture__likes').textContent = item.likes;
+  thumbnail.querySelector('.picture__comments').textContent = item.comments.length;
+  return thumbnail;
 };
 export const bigPhoto = document.querySelector('.big-picture');
 export const renderPhotos = (items) => {
   items.forEach((item) => {
-    const element = renderElement(item);
-    element.addEventListener('click', () => {
+    const thumbnail = renderThumbnail(item);
+    thumbnail.addEventListener('click', () => {
       bigPhoto.querySelector('.big-picture__img>img').setAttribute('src', item.url);
       bigPhoto.querySelector('.likes-count').textContent = item.likes;
       bigPhoto.querySelector('.comments-count').textContent = item.comments.length;
@@ -25,10 +25,10 @@ export const renderPhotos = (items) => {
       bigPhoto.querySelectorAll('.social__text')[0].textContent = item.comments[0].message;
       bigPhoto.querySelectorAll('.social__text')[1].textContent = item.comments[1].message;
     });
-    element.addEventListener('click', () => {
+    thumbnail.addEventListener('click', () => {
       openBigPhoto(bigPhoto);
     });
-    elementFragment.append(element);
+    elementFragment.append(thumbnail);
   });
   return container.append(elementFragment);
 };
