@@ -12,16 +12,17 @@ const renderElement = (item) => {
 export const bigPhoto = document.querySelector('.big-picture');
 export const renderPhotos = (items) => {
   items.forEach((item) => {
+    window.console.log(bigPhoto.querySelectorAll('.social__comment>img'));
     const element = renderElement(item);
     element.addEventListener('click', () => {
       bigPhoto.querySelector('.big-picture__img>img').setAttribute('src', item.url);
       bigPhoto.querySelector('.likes-count').textContent = item.likes;
       bigPhoto.querySelector('.comments-count').textContent = item.comments.length;
       bigPhoto.querySelector('.social__caption').textContent = item.description;
-      bigPhoto.querySelectorAll('.social__picture')[0].setAttribute('src', item.comments[0].avatar);
-      bigPhoto.querySelectorAll('.social__picture')[1].setAttribute('src', item.comments[1].avatar);
-      bigPhoto.querySelectorAll('.social__picture')[0].setAttribute('alt', item.comments[0].name);
-      bigPhoto.querySelectorAll('.social__picture')[1].setAttribute('alt', item.comments[1].name);
+      bigPhoto.querySelectorAll('.social__comment>img')[0].setAttribute('src', item.comments[0].avatar);
+      bigPhoto.querySelectorAll('.social__comment>img')[1].setAttribute('src', item.comments[1].avatar);
+      bigPhoto.querySelectorAll('.social__comment>img')[0].setAttribute('alt', item.comments[0].name);
+      bigPhoto.querySelectorAll('.social__comment>img')[1].setAttribute('alt', item.comments[1].name);
       bigPhoto.querySelectorAll('.social__text')[0].textContent = item.comments[0].message;
       bigPhoto.querySelectorAll('.social__text')[1].textContent = item.comments[1].message;
     });
