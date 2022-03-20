@@ -12,7 +12,6 @@ const renderElement = (item) => {
 export const bigPhoto = document.querySelector('.big-picture');
 export const renderPhotos = (items) => {
   items.forEach((item) => {
-    window.console.log(bigPhoto.querySelectorAll('.social__comment>img'));
     const element = renderElement(item);
     element.addEventListener('click', () => {
       bigPhoto.querySelector('.big-picture__img>img').setAttribute('src', item.url);
