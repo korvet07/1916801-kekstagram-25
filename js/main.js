@@ -1,6 +1,8 @@
 import { getMockPhotos } from './data.js';
-import { bigPhoto, renderPhotos } from './render-photos.js';
-import { сloseBigPhoto } from './event-handler.js';
+import { renderPhotos } from './render-photos.js';
+import { setCloseBigPhoto, setOpenBigPhoto } from './big-photo.js';
 const photosMoreUsers = getMockPhotos();
-сloseBigPhoto(bigPhoto);
+const photo = document.querySelector('.big-picture');
 renderPhotos(photosMoreUsers);
+setOpenBigPhoto(photo);
+setCloseBigPhoto(photo);

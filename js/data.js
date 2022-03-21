@@ -38,4 +38,3 @@ const createDescriptionsPhotos = () => ({
   comments: Array.from({ length: 6 }, createComment),
 });
 export const getMockPhotos = () => Array.from({ length: COLLECTION_DESCRIPTIONS }, createDescriptionsPhotos);
-
