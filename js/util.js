@@ -12,12 +12,12 @@ function checkLengthString(checkString, maxLength = 140) {
 }
 checkLengthString('строка');
 
-const createRandomCommentId =(min, max) =>{
+const createRandomCommentId = (min, max) => {
   const previousValues = [];
   return function () {
     let currentValue = getRandomIntInclusive(min, max);
     if (previousValues.length >= (max - min + 1)) {
-      window.console.error(`Перебраны все числа из диапазона от ${ min } до ${ max }`);
+      window.console.error(`Перебраны все числа из диапазона от ${min} до ${max}`);
       return null;
     }
     while (previousValues.includes(currentValue)) {
@@ -28,6 +28,6 @@ const createRandomCommentId =(min, max) =>{
   };
 };
 
-export const getNextCommentId = createRandomCommentId (1, 150);
+export const getNextCommentId = createRandomCommentId(1, 150);
 export const getRandomArrayElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
-export {getRandomIntInclusive};
+export { getRandomIntInclusive };

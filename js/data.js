@@ -1,4 +1,4 @@
-import {getNextCommentId, getRandomArrayElement, getRandomIntInclusive} from './util.js';
+import { getNextCommentId, getRandomArrayElement, getRandomIntInclusive } from './util.js';
 const NAMES = [
   'Иван',
   'Хуан Себастьян',
@@ -20,7 +20,7 @@ const MESSAGE_COMMENTS = [
 const COLLECTION_DESCRIPTIONS = 25;
 function createIdGenerator() {
   let sumCount = 0;
-  return  (n) => sumCount >= n ? 1 : ++sumCount;
+  return (n) => sumCount >= n ? 1 : ++sumCount;
 }
 const makeCountIdDescription = createIdGenerator();
 const makeCountValuePhoto = createIdGenerator();
@@ -35,7 +35,6 @@ const createDescriptionsPhotos = () => ({
   url: `photos/${makeCountValuePhoto(25)}.jpg`,
   description: 'Это мы на Гаваях)',
   likes: getRandomIntInclusive(15, 200),
-  comments: Array.from({length:6}, createComment),
+  comments: Array.from({ length: 6 }, createComment),
 });
 export const getMockPhotos = () => Array.from({ length: COLLECTION_DESCRIPTIONS }, createDescriptionsPhotos);
-
