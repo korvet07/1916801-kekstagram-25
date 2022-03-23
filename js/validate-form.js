@@ -1,6 +1,10 @@
 import { formAddedPhoto, onCloseFormEscKey } from './form.js';
 import { checkLengthString } from './util.js';
-const pristine = new Pristine(formAddedPhoto);
+const pristine = new Pristine(formAddedPhoto,{
+  classTo: 'img-upload__text',
+  errorTextParent: 'img-upload__text',
+  errorTextClass: 'img-upload__text',
+});
 const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
 const commetnsInput = formAddedPhoto.querySelector('.text__description');
 const checkSimbvolHashtags = (hashtag) => {
