@@ -11,14 +11,6 @@ const openBigPhoto = () => {
   document.querySelector('.comments-loader').classList.add('hidden');
   document.body.classList.add('modal-open');
 };
-export const setOpenBigPhoto = () => {
-  const thumbnails = document.querySelectorAll('.picture');
-  thumbnails.forEach((thumbnail) => {
-    thumbnail.addEventListener('click', () => {
-      openBigPhoto();
-    });
-  });
-};
 const onBigPhotoEscKey = (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
@@ -27,6 +19,14 @@ const onBigPhotoEscKey = (evt) => {
 };
 const onBigPhotoClick = () => {
   closeBigPhoto();
+};
+export const setOpenBigPhoto = () => {
+  const thumbnails = document.querySelectorAll('.picture');
+  thumbnails.forEach((thumbnail) => {
+    thumbnail.addEventListener('click', () => {
+      openBigPhoto();
+    });
+  });
 };
 export const setCloseBigPhoto = () => {
   if (!photo.matches('hidden')) {

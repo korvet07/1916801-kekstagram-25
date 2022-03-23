@@ -6,12 +6,6 @@ function getRandomIntInclusive(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-function checkLengthString(checkString, maxLength = 140) {
-  return checkString.length <= maxLength;
-}
-checkLengthString('строка');
-
 const createRandomCommentId = (min, max) => {
   const previousValues = [];
   return function () {
@@ -27,7 +21,7 @@ const createRandomCommentId = (min, max) => {
     return currentValue;
   };
 };
-
+export const checkLengthString = (value, maxLength = 140) => value.length <= maxLength;
 export const getNextCommentId = createRandomCommentId(1, 150);
 export const getRandomArrayElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
 export { getRandomIntInclusive };

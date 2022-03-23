@@ -1,7 +1,11 @@
 import { getMockPhotos } from './data.js';
 import { renderPhotos } from './render-photos.js';
 import { setCloseBigPhoto, setOpenBigPhoto } from './big-photo.js';
+import { setOverlayForm } from './form.js';
+import {stopPropagation} from'./validate-form.js';
 const photosMoreUsers = getMockPhotos();
 renderPhotos(photosMoreUsers);
 setOpenBigPhoto();
 setCloseBigPhoto();
+setOverlayForm();
+stopPropagation();
