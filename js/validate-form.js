@@ -4,17 +4,11 @@ const pristine = new Pristine(formAddedPhoto);
 const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
 const commetnsInput = formAddedPhoto.querySelector('.text__description');
 const checkSimbvolHashtags = (hashtag) => {
-  const regularExpression = /^([A-Za-zА-Яа-яЁё0-9]{1,19}[\s+]*)*$/;
+  const regularExpression = /^(#[A-Za-zА-Яа-яЁё0-9]{1,19}[\s+]*)*$/;
   return regularExpression.test(hashtag);
 };
-const changeArrayElement = () => {
-  const hashtags = hashtagsInput.value.split(' #');
-  const hash = hashtags[0].substr(1);
-  hashtags[0] = hash;
-  return hashtags;
-};
 const checkComparisonHashtags = () => {
-  const hashtags =changeArrayElement();
+  const hashtags =hashtagsInput.value.split(' ');
   const newHashtags = hashtags.map((hashtag)=> hashtag.toUpperCase());
   const compare = new Set(newHashtags);
   if(newHashtags.length > compare.size){
@@ -24,7 +18,7 @@ const checkComparisonHashtags = () => {
   }
 };
 const checkHashtags = () => {
-  const hashtags = changeArrayElement();
+  const hashtags = hashtagsInput.value.split(' ');
   if (hashtags.length <= 5) {
     for (const hashtag of hashtags) {
       if (!checkSimbvolHashtags(hashtag)) {
