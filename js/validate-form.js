@@ -4,7 +4,7 @@ const pristine = new Pristine(formAddedPhoto);
 const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
 const commetnsInput = formAddedPhoto.querySelector('.text__description');
 const checkSimbvolHashtags = (hashtag) => {
-  const regularExpression = /^[A-Za-zА-Яа-яЕё0-9]{1,19}$/;
+  const regularExpression = /^([A-Za-zА-Яа-яЁё0-9]{1,19}[\s+]*)*$/;
   return regularExpression.test(hashtag);
 };
 const changeArrayElement = () => {
