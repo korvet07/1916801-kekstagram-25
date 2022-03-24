@@ -1,48 +1,44 @@
-import { formAddedPhoto, onCloseFormEscKey } from './form.js';
-// import { checkLengthString } from './util.js';
-const pristine = new Pristine(formAddedPhoto,{
-  classTo: 'form-upload__label-hashtags',
-  errorTextParent: 'form-upload__label-hashtags',
+import { onCloseFormEscKey } from './form.js';
+const formAddedPhoto = document.querySelector('#upload-select-image');
+const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
+const commentsInput = formAddedPhoto.querySelector('.text__description');
+const pristine = new Pristine(formAddedPhoto, {
+  classTo: 'img-upload__text',
+  errorTextParent: 'img-upload__text',
   errorTextClass: 'img-upload__text-error',
 });
-const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
-const commetnsInput = formAddedPhoto.querySelector('.text__description');
-const checkSimbvolHashtags = (hashtag) => {
+const checkLengthString = () => commentsInput.value.length <= 140;
+const checkSymbvolHashtags = (hashtag) => {
   const regularExpression = /^(#[A-Za-zА-Яа-яЁё0-9]{1,19}[\s+]*)*$/;
   return regularExpression.test(hashtag);
 };
 const checkComparisonHashtags = () => {
-  const hashtags =hashtagsInput.value.split(' ');
-  const newHashtags = hashtags.map((hashtag)=> hashtag.toUpperCase());
+  const hashtags = hashtagsInput.value.split(' ');
+  const newHashtags = hashtags.map((hashtag) => hashtag.toUpperCase());
   const compare = new Set(newHashtags);
-  if(newHashtags.length > compare.size){
-    return false;
-  }else{
-    return true;
-  }
+  return !(newHashtags.length > compare.size);
+
 };
 const checkHashtags = () => {
   const hashtags = hashtagsInput.value.split(' ');
   if (hashtags.length <= 5) {
-    for (const hashtag of hashtags) {
-      if (!checkSimbvolHashtags(hashtag)) {
-        return false;
-      }
-    }
-    return true;
-  } else {
-    return false;
+    const newHashtags = hashtags.map((hashtag) => checkSymbvolHashtags(hashtag));
+    return !newHashtags.includes(false);
   }
+  return false;
 };
-const finaleCheckHashtags = () => {
+const stopCheckHashtags = () => {
   if (checkHashtags()) {
     return checkComparisonHashtags();
-  } else {
-    return false;
   }
+  return false;
 };
 hashtagsInput.addEventListener('change', () => {
-  finaleCheckHashtags();
+  stopCheckHashtags();
+  window.console.log(stopCheckHashtags());
+});
+commentsInput.addEventListener('change', () => {
+  checkLengthString();
 });
 const removeListenerEscKey = () => {
   document.removeEventListener('keydown', onCloseFormEscKey);
@@ -50,24 +46,25 @@ const removeListenerEscKey = () => {
 const addedListenerEscKey = () => {
   document.addEventListener('keydown', onCloseFormEscKey);
 };
-// pristine.addValidator(hashtagsInput, finaleCheckHashtags);
-formAddedPhoto.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+pristine.addValidator(hashtagsInput, stopCheckHashtags);
+pristine.addValidator(commentsInput, checkLengthString, 'Не более 140 символов');
+formAddedPhoto.addEventListener('submit', (event) => {
+  const isValid = pristine.validate();
+  if (!isValid) {
+    event.preventDefault();
+  }
 });
-// pristine.addValidator(commetnsInput, checkLengthString);
-// formAddedPhoto.addEventListener('submit', (evt) => {
-//   evt.preventDefault();
-//   pristine.validate();
-// });
-export const stopPropagation = () => {
+export const resetValueInputs = () => {
+  formAddedPhoto.reset();
+};
+export const cancelListenerEscKey = () => {
   hashtagsInput.addEventListener('focus', () => {
     removeListenerEscKey();
   });
-  commetnsInput.addEventListener('focus', () => {
+  commentsInput.addEventListener('focus', () => {
     removeListenerEscKey();
   });
-  commetnsInput.addEventListener('blur', () => {
+  commentsInput.addEventListener('blur', () => {
     addedListenerEscKey();
   });
   hashtagsInput.addEventListener('blur', () => {

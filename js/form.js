@@ -1,3 +1,4 @@
+import { resetValueInputs } from './validate-form.js';
 const controllerForm = document.querySelector('#upload-file');
 const overlayForm = document.querySelector('.img-upload__overlay');
 const closeFormButton = document.querySelector('.img-upload__cancel');
@@ -11,6 +12,7 @@ const closeForm = () => {
 };
 const onCloseFormButtonClick = () => {
   closeForm();
+
 };
 controllerForm.addEventListener('change', onControllerFormChange);
 export const onCloseFormEscKey = (evt) => {
@@ -19,14 +21,12 @@ export const onCloseFormEscKey = (evt) => {
     closeForm();
   }
 };
-export const formAddedPhoto = document.querySelector('#upload-select-image');
 export const setOverlayForm = () => {
   if (!overlayForm.matches('hidden')) {
-    document.addEventListener('keydown', onCloseFormEscKey);
-    closeFormButton.addEventListener('click', onCloseFormButtonClick);
+    document.addEventListener('keydown', onCloseFormEscKey, resetValueInputs);
+    closeFormButton.addEventListener('click', onCloseFormButtonClick, resetValueInputs);
   } else {
     document.removeEventListener('keydown', onCloseFormEscKey);
     closeFormButton.removeEventListener('click', onCloseFormButtonClick);
-    formAddedPhoto.reset();
   }
 };
