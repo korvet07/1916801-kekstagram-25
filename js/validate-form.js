@@ -4,8 +4,11 @@ const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
 const commentsInput = formAddedPhoto.querySelector('.text__description');
 const pristine = new Pristine(formAddedPhoto, {
   classTo: 'img-upload__text',
+  errorClass: 'img-upload__text--invalid',
+  successClass: 'img-upload__text--valid',
   errorTextParent: 'img-upload__text',
-  errorTextClass: 'img-upload__text-error',
+  errorTextTag: 'div',
+  errorTextClass: 'img-upload__error',
 });
 const checkLengthString = () => commentsInput.value.length <= 140;
 const checkSymbvolHashtags = (hashtag) => {

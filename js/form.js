@@ -12,19 +12,20 @@ const closeForm = () => {
 };
 const onCloseFormButtonClick = () => {
   closeForm();
-
 };
 controllerForm.addEventListener('change', onControllerFormChange);
 export const onCloseFormEscKey = (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
     closeForm();
+    resetValueInputs();
   }
 };
 export const setOverlayForm = () => {
   if (!overlayForm.matches('hidden')) {
-    document.addEventListener('keydown', onCloseFormEscKey, resetValueInputs);
-    closeFormButton.addEventListener('click', onCloseFormButtonClick, resetValueInputs);
+    document.addEventListener('keydown', onCloseFormEscKey);
+    closeFormButton.addEventListener('click', onCloseFormButtonClick );
+
   } else {
     document.removeEventListener('keydown', onCloseFormEscKey);
     closeFormButton.removeEventListener('click', onCloseFormButtonClick);
