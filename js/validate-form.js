@@ -1,9 +1,9 @@
 import { formAddedPhoto, onCloseFormEscKey } from './form.js';
-import { checkLengthString } from './util.js';
+// import { checkLengthString } from './util.js';
 const pristine = new Pristine(formAddedPhoto,{
-  classTo: 'img-upload__text',
-  errorTextParent: 'img-upload__text',
-  errorTextClass: 'img-upload__text',
+  classTo: 'form-upload__label-hashtags',
+  errorTextParent: 'form-upload__label-hashtags',
+  errorTextClass: 'img-upload__text-error',
 });
 const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
 const commetnsInput = formAddedPhoto.querySelector('.text__description');
@@ -50,17 +50,16 @@ const removeListenerEscKey = () => {
 const addedListenerEscKey = () => {
   document.addEventListener('keydown', onCloseFormEscKey);
 };
-
-pristine.addValidator(hashtagsInput, finaleCheckHashtags);
+// pristine.addValidator(hashtagsInput, finaleCheckHashtags);
 formAddedPhoto.addEventListener('submit', (evt) => {
   evt.preventDefault();
   pristine.validate();
 });
-pristine.addValidator(commetnsInput, checkLengthString);
-formAddedPhoto.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-});
+// pristine.addValidator(commetnsInput, checkLengthString);
+// formAddedPhoto.addEventListener('submit', (evt) => {
+//   evt.preventDefault();
+//   pristine.validate();
+// });
 export const stopPropagation = () => {
   hashtagsInput.addEventListener('focus', () => {
     removeListenerEscKey();
