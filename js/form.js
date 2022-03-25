@@ -15,9 +15,9 @@ const onCloseFormButtonClick = () => {
   closeForm();
 };
 export const addListenerCloseButton = () => {
-  closeFormButton.addEventListener('click', onCloseFormButtonClick );
+  closeFormButton.addEventListener('click', onCloseFormButtonClick);
 };
-export const  removeListenerCloseButton = () => {
+export const removeListenerCloseButton = () => {
   closeFormButton.removeEventListener('click', onCloseFormButtonClick);
 };
 export const onCloseFormEscKey = (evt) => {
