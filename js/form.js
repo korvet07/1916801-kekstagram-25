@@ -10,7 +10,6 @@ const closeForm = () => {
   overlayForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
 };
-controllerForm.addEventListener('change', onControllerFormChange);
 const onCloseFormButtonClick = () => {
   closeForm();
 };
@@ -28,11 +27,14 @@ export const onCloseFormEscKey = (evt) => {
   }
 };
 export const setOverlayForm = () => {
+  controllerForm.addEventListener('change', onControllerFormChange);
   if (!overlayForm.matches('hidden')) {
-    document.addEventListener('keydown', onCloseFormEscKey);
     addListenerCloseButton();
+    document.addEventListener('keydown', onCloseFormEscKey);
+
   } else {
     document.removeEventListener('keydown', onCloseFormEscKey);
     removeListenerCloseButton();
   }
 };
+
