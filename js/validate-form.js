@@ -11,19 +11,19 @@ const pristine = new Pristine(formAddedPhoto, {
   errorTextClass: 'form-upload__error',
 });
 const checkLengthString = () => commentsInput.value.length <= 140;
-// const checkLengthHashtag = () => {
-//   const hashtags = hashtagsInput.value.split(' ');
-//   const newHashtags = hashtags.map((hashtag) => hashtag.length );
-//   for (const newHashtag of newHashtags){
-//     if ( +newHashtag >= 20){
-//       return false;
-//     }
-//     return true;
-//   }
-// };
+const checkLengthHashtag = () => {
+  const hashtags = hashtagsInput.value.split(' ');
+  const newHashtags = hashtags.map((hashtag) => hashtag.length );
+  for (const newHashtag of newHashtags){
+    if ( +newHashtag >= 20){
+      return false;
+    }
+    return true;
+  }
+};
 const checkSymbvolHashtags = () => {
   const hashtags = hashtagsInput.value.split(' ');
-  const regularExpression = /^(#[A-Za-zА-Яа-яЁё0-9]{1,19}[\s+]*)*$/;
+  const regularExpression = /^(#[A-Za-zА-Яа-яЁё0-9]{1,}[\s+]*)*$/;
   const newHashtags = hashtags.map((hashtag) => regularExpression.test(hashtag));
   return !newHashtags.includes(false);
 };
@@ -45,7 +45,7 @@ const removeListenerEscKey = () => {
 const addedListenerEscKey = () => {
   document.addEventListener('keydown', onCloseFormEscKey);
 };
-// pristine.addValidator(hashtagsInput, checkLengthHashtag, 'не более 20 символов в 1 хештеге!');
+pristine.addValidator(hashtagsInput, checkLengthHashtag, 'не более 20 символов в 1 хештеге!');
 pristine.addValidator(hashtagsInput, checkSymbvolHashtags, 'хештеги должны начинаться с # или недопустимые символы в хештеге');
 pristine.addValidator(hashtagsInput, checkComparisonHashtags, 'одинаковые хештеги не допустимы!');
 pristine.addValidator(hashtagsInput, checkAmountHashtag, 'не более 5 хештегов!');
