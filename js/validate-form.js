@@ -8,7 +8,7 @@ const pristine = new Pristine(formAddedPhoto, {
   successClass: 'img-upload__text--valid',
   errorTextParent: 'img-upload__text',
   errorTextTag: 'div',
-  errorTextClass: 'img-upload__error',
+  errorTextClass: 'form-upload__error',
 });
 const checkLengthString = () => commentsInput.value.length <= 140;
 const checkSymbvolHashtags = (hashtag) => {
