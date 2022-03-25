@@ -13,10 +13,10 @@ const closeForm = () => {
 const onCloseFormButtonClick = () => {
   closeForm();
 };
-export const addListenerCloseButton = () => {
+const addListenerCloseButton = () => {
   closeFormButton.addEventListener('click', onCloseFormButtonClick);
 };
-export const removeListenerCloseButton = () => {
+const removeListenerCloseButton = () => {
   closeFormButton.removeEventListener('click', onCloseFormButtonClick);
 };
 export const onCloseFormEscKey = (evt) => {
