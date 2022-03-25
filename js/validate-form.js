@@ -1,4 +1,4 @@
-import { onCloseFormEscKey, addListenerCloseButton, removeListenerCloseButton  } from './form.js';
+import { onCloseFormEscKey, addListenerCloseButton, removeListenerCloseButton } from './form.js';
 const formAddedPhoto = document.querySelector('#upload-select-image');
 const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
 const commentsInput = formAddedPhoto.querySelector('.text__description');
@@ -82,7 +82,7 @@ export const stopClosedForm = () => {
   hashtagsInput.addEventListener('blur', () => {
     addedListenerEscKey();
   });
-  hashtagsInput.addEventListener('blur', ()=>{
+  hashtagsInput.addEventListener('blur', () => {
     addListenerCloseButton();
   });
 };
