@@ -1,4 +1,4 @@
-import { onCloseFormEscKey } from './form.js';
+import { onCloseFormEscKey, addListenerCloseButton, removeListenerCloseButton  } from './form.js';
 const formAddedPhoto = document.querySelector('#upload-select-image');
 const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
 const commentsInput = formAddedPhoto.querySelector('.text__description');
@@ -60,17 +60,29 @@ formAddedPhoto.addEventListener('submit', (event) => {
 export const resetValueInputs = () => {
   formAddedPhoto.reset();
 };
-export const cancelListenerEscKey = () => {
+export const stopClosedForm = () => {
   hashtagsInput.addEventListener('focus', () => {
     removeListenerEscKey();
   });
   commentsInput.addEventListener('focus', () => {
     removeListenerEscKey();
   });
+  commentsInput.addEventListener('focus', () => {
+    removeListenerCloseButton();
+  });
+  hashtagsInput.addEventListener('focus', () => {
+    removeListenerCloseButton();
+  });
   commentsInput.addEventListener('blur', () => {
     addedListenerEscKey();
   });
+  commentsInput.addEventListener('blur', () => {
+    addListenerCloseButton();
+  });
   hashtagsInput.addEventListener('blur', () => {
     addedListenerEscKey();
+  });
+  hashtagsInput.addEventListener('blur', ()=>{
+    addListenerCloseButton();
   });
 };
