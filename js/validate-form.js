@@ -1,4 +1,4 @@
-import { onCloseFormEscKey } from './form.js';
+import { closeForm } from './form.js';
 const formAddedPhoto = document.querySelector('#upload-select-image');
 const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
 const commentsInput = formAddedPhoto.querySelector('.text__description');
@@ -29,12 +29,7 @@ const checkAmountHashtag = () => {
   const hashtags = hashtagsInput.value.split(' ');
   return hashtags.length <= 5;
 };
-const removeListenerEscKey = () => {
-  document.removeEventListener('keydown', onCloseFormEscKey);
-};
-const addedListenerEscKey = () => {
-  document.addEventListener('keydown', onCloseFormEscKey);
-};
+
 export const validateForm = () => {
   const pristine = new Pristine(formAddedPhoto, {
     classTo: 'img-upload__text',
@@ -58,18 +53,10 @@ export const validateForm = () => {
 export const resetValueInputs = () => {
   formAddedPhoto.reset();
 };
-
-export const stopClosedForm = () => {
-  hashtagsInput.addEventListener('focus', () => {
-    removeListenerEscKey();
-  });
-  commentsInput.addEventListener('focus', () => {
-    removeListenerEscKey();
-  });
-  commentsInput.addEventListener('blur', () => {
-    addedListenerEscKey();
-  });
-  hashtagsInput.addEventListener('blur', () => {
-    addedListenerEscKey();
-  });
+export const onCloseFormEscKey = (evt) => {
+  if (evt.key === 'Escape' && evt.target !== hashtagsInput && evt.target !== commentsInput) {
+    evt.preventDefault();
+    closeForm();
+    resetValueInputs();
+  }
 };

@@ -1,14 +1,10 @@
 const photo = document.querySelector('.big-picture');
 const closeBigPhoto = () => {
   photo.classList.add('hidden');
-  document.querySelector('.social__comment-count').classList.remove('hidden');
-  document.querySelector('.comments-loader').classList.remove('hidden');
   document.body.classList.remove('modal-open');
 };
 const openBigPhoto = () => {
   photo.classList.remove('hidden');
-  document.querySelector('.social__comment-count').classList.add('hidden');
-  document.querySelector('.comments-loader').classList.add('hidden');
   document.body.classList.add('modal-open');
 };
 const onBigPhotoEscKey = (evt) => {
