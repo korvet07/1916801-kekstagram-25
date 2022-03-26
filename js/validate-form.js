@@ -45,12 +45,13 @@ export const validateForm = () => {
   pristine.addValidator(hashtagsInput, checkAmountHashtag, 'Не более 5 хештегов!');
   pristine.addValidator(commentsInput, checkLengthString, 'Не более 140 символов');
   formAddedPhoto.addEventListener('submit', (event) => {
+    pristine.validate();
     if (!pristine.validate()) {
       event.preventDefault();
     }
   });
 };
-export const resetValueInputs = () => {
+const resetValueInputs = () => {
   formAddedPhoto.reset();
 };
 export const onCloseFormEscKey = (evt) => {
