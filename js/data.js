@@ -26,7 +26,7 @@ const makeCountIdDescription = createIdGenerator();
 const makeCountValuePhoto = createIdGenerator();
 const createComment = () => ({
   id: getNextCommentId(),
-  avatar: `img/avatar-${getRandomIntInclusive(1, 6)}.svg`,
+  avatar: `img/avatar-${getRandomIntInclusive(1, 5)}.svg`,
   message: getRandomArrayElement(MESSAGE_COMMENTS),
   name: getRandomArrayElement(NAMES),
 });
@@ -35,6 +35,6 @@ const createDescriptionsPhotos = () => ({
   url: `photos/${makeCountValuePhoto(25)}.jpg`,
   description: 'Это мы на Гаваях)',
   likes: getRandomIntInclusive(15, 200),
-  comments: Array.from({ length: 6 }, createComment),
+  comments: Array.from({ length: 10 }, createComment),
 });
 export const getMockPhotos = () => Array.from({ length: COLLECTION_DESCRIPTIONS }, createDescriptionsPhotos);
