@@ -63,12 +63,12 @@ const checkAmountHashtag = () => {
 };
 export const validateForm = () => {
   const pristine = new Pristine(formAddedPhoto, {
-    classTo: 'img-upload__text',
+    classTo: 'form-upload__error',
     errorClass: 'img-upload__text--invalid',
     successClass: 'img-upload__text--valid',
-    errorTextParent: 'img-upload__text',
+    errorTextParent: 'form-upload__error',
     errorTextTag: 'div',
-    errorTextClass: 'form-upload__error',
+    errorTextClass: 'img-upload__text',
   });
   pristine.addValidator(hashtagsInput, checkLengthHashtag, 'Hе более 20 символов в 1 хештеге!');
   pristine.addValidator(hashtagsInput, checkSymbolHashtags, 'Хештеги должны начинаться с # или недопустимые символы в хештеге');
