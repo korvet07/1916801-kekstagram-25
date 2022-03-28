@@ -76,8 +76,7 @@ export const validateForm = () => {
   pristine.addValidator(hashtagsInput, checkAmountHashtag, 'Не более 5 хештегов!');
   pristine.addValidator(commentsInput, checkLengthString, 'Не более 140 символов');
   formAddedPhoto.addEventListener('submit', (evt) => {
-    pristine.validate();
-    if (!pristine.validate()) {
+    if (!pristine.validate(hashtagsInput) || !pristine.validate(commentsInput)) {
       evt.preventDefault();
     }
   });
