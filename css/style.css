@@ -1193,8 +1193,10 @@ main {
  */
 .pristine-error{
   font-weight: bold;
-  background-color: rgb(253, 246, 246);
+  background-color: rgb(237 211 211);
   color: #ee152e;
+  margin-bottom: 5px;
+  padding: 5px 0;
 }
 .error,
 .success {

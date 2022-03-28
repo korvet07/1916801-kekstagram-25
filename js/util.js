@@ -21,7 +21,6 @@ const createRandomCommentId = (min, max) => {
     return currentValue;
   };
 };
-
 export const getNextCommentId = createRandomCommentId(1, 325);
 export const getRandomArrayElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
 export { getRandomIntInclusive };
