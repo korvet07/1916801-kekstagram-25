@@ -49,27 +49,27 @@ export const setCloseBigPhoto = () => {
 
 export const renderBigPhoto = (item) => {
 
-  const renderSocialComments = () => {
-    document.querySelector('.big-picture__img>img').setAttribute('src', item.url);
-    document.querySelector('.likes-count').textContent = item.likes;
-    document.querySelector('.comments-count').textContent = item.comments.length;
-    document.querySelector('.social__caption').textContent = item.description;
-    const renderComments = (n) => {
-      for (let i = 0; i <= n; i++) {
-        document.querySelectorAll('.social__comment>img')[i].setAttribute('src', item.comments[i].avatar);
-        document.querySelectorAll('.social__comment>img')[i].setAttribute('alt', item.comments[i].name);
-        document.querySelectorAll('.social__text')[i].textContent = item.comments[i].message;
-      }
-    };
-    renderComments(4);
+
+  document.querySelector('.big-picture__img>img').setAttribute('src', item.url);
+  document.querySelector('.likes-count').textContent = item.likes;
+  document.querySelector('.comments-count').textContent = item.comments.length;
+  document.querySelector('.social__caption').textContent = item.description;
+  const renderComments = (n) => {
+    for (let i = 0; i <= n; i++) {
+      document.querySelectorAll('.social__comment>img')[i].setAttribute('src', item.comments[i].avatar);
+      document.querySelectorAll('.social__comment>img')[i].setAttribute('alt', item.comments[i].name);
+      document.querySelectorAll('.social__text')[i].textContent = item.comments[i].message;
+    }
   };
+  renderComments(4);
+
 
   if(item.comments.length < 5){
     buttonLoaderComments.classList.remove('hidden');
     getNewSocialComments(item.comments.length);
-    renderSocialComments(item.comments.length + 10 );
+    renderComments(item.comments.length);
   }
-  renderSocialComments();
+  renderComments(4);
   window.console.log(item.comments, document.querySelectorAll('.social__comment>img'));
   const onButtonLoadCommentsClick =  ()  => {
     item.comments.splice(0, 5);
@@ -81,14 +81,13 @@ export const renderBigPhoto = (item) => {
     }
     window.console.log(item.comments, document.querySelectorAll('.social__comment>img'));
     getNewSocialComments(5);
-    renderSocialComments(4, 0);
+    renderComments(4);
 
   };
   buttonLoaderComments.addEventListener('click', onButtonLoadCommentsClick);
   buttonCloseBigPhoto.addEventListener('click', () => {
 
 
-    renderSocialComments();
     window.console.log(item.comments);
     // renderSocialComments();
   });

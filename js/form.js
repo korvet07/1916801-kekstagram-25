@@ -24,7 +24,7 @@ const onCloseFormEscKey = (evt) => {
     closeForm();
     resetValueInputs();
 
-  } else{
+  } else {
     document.body.classList.toggle('modal-open');
   }
 };
