@@ -24,7 +24,8 @@ const onCloseFormEscKey = (evt) => {
     closeForm();
     resetValueInputs();
 
-  } else {
+  }
+  if (evt.key === 'Escape' && evt.target === hashtagsInput && evt.target === commentsInput) {
     document.body.classList.toggle('modal-open');
   }
 };
