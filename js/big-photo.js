@@ -19,7 +19,7 @@ const closeBigPhoto = () => {
 const openBigPhoto = () => {
   photo.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  buttonLoaderComments.classList.remove('hidden');
+
 };
 const onBigPhotoEscKey = (evt) => {
   if (evt.key === 'Escape') {
@@ -68,8 +68,8 @@ export const renderBigPhoto = (item) => {
   renderTextComments(4, 0);
   const newComments = socialComments.innerHTML;
   const onButtonLoadCommentsClick = () => {
-    window.console.log(item.comments);
-    if (item.comments.length > dataComments.length) {
+    window.console.log(item.comments, dataComments.length, socialComments );
+    if (item.comments.length > dataComments.length|| amountShownComments.length > dataComments.length) {
       socialComments.innerHTML = '';
       socialComments.insertAdjacentHTML('beforeend', newComments);
       item.comments.length = 0;
@@ -94,6 +94,7 @@ export const renderBigPhoto = (item) => {
     socialComments.insertAdjacentHTML('beforeend', newComments);
     item.comments.length = 0;
     item.comments = dataComments.slice();
-    window.console.log(item.comments);
+    buttonLoaderComments.classList.remove('hidden');
+    window.console.log(socialComments);
   });
 };
