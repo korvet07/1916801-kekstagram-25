@@ -68,7 +68,7 @@ export const renderBigPhoto = (item) => {
   };
   renderComments();
   renderTextComments(4, 0);
-  const newComments = socialComments.innerHTML;
+  const templateComments = socialComments.innerHTML;
   const onButtonLoadCommentsClick = () => {
     recorderComments = recorderComments.concat(item.comments.splice(0, 5));
     if (item.comments.length < 5) {
@@ -85,7 +85,7 @@ export const renderBigPhoto = (item) => {
   buttonLoaderComments.addEventListener('click', onButtonLoadCommentsClick);
   buttonCloseBigPhoto.addEventListener('click', () => {
     socialComments.innerHTML = '';
-    socialComments.insertAdjacentHTML('beforeend', newComments);
+    socialComments.insertAdjacentHTML('beforeend', templateComments);
     item.comments.length = 0;
     item.comments = dataComments.slice();
     buttonLoaderComments.classList.remove('hidden');
