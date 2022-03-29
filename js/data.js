@@ -18,10 +18,10 @@ const MESSAGE_COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 const COLLECTION_DESCRIPTIONS = 25;
-function createIdGenerator() {
+const createIdGenerator = () => {
   let sumCount = 0;
   return (n) => sumCount >= n ? 1 : ++sumCount;
-}
+};
 const makeCountIdDescription = createIdGenerator();
 const makeCountValuePhoto = createIdGenerator();
 const createComment = () => ({
