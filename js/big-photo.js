@@ -50,6 +50,7 @@ export const setCloseBigPhoto = () => {
   }
 };
 export const renderBigPhoto = (item) => {
+
   const dataComments = item.comments.slice();
   const amountComments = item.comments.length;
   const renderComments = () => {
@@ -59,11 +60,13 @@ export const renderBigPhoto = (item) => {
     socialCommentsCount.innerHTML = `${amountShownComments.length} из <span class="comments-count">${amountComments}</span> комментариев`;
   };
   //   количество показываемых комментариев для цикла - l-1, m - переменная для коррекции записи данных в новые комментарии, с учётом уже записанных
-  const renderTextComments = (l, m) => {
+  const renderTextComments = function(l, m) {
+    const imgAvatars = document.querySelectorAll('.social__comment>img');
+    const textComments = document.querySelectorAll('.social__text');
     for (let i = 0; i <= l; i++) {
-      document.querySelectorAll('.social__comment>img')[i + m].setAttribute('src', item.comments[i].avatar);
-      document.querySelectorAll('.social__comment>img')[i + m].setAttribute('alt', item.comments[i].name);
-      document.querySelectorAll('.social__text')[i + m].textContent = item.comments[i].message;
+      imgAvatars[i + m].setAttribute('src', item.comments[i].avatar);
+      imgAvatars[i + m].setAttribute('alt', item.comments[i].name);
+      textComments[i + m].textContent = item.comments[i].message;
     }
   };
   renderComments();
