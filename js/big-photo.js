@@ -52,35 +52,34 @@ export const setCloseBigPhoto = () => {
     buttonCloseBigPhoto.removeEventListener('click', onBigPhotoClick);
   }
 };
+const renderComments = (item) => {
+  document.querySelector('.big-picture__img>img').setAttribute('src', item.url);
+  document.querySelector('.likes-count').textContent = item.likes;
+  document.querySelector('.social__caption').textContent = item.description;
+};
+const renderTextComments = function (l, m, item) {
+  for (let i = 0; i <= l; i++) {
+    document.querySelectorAll('.social__comment>img')[i + m].setAttribute('src', item.comments[i].avatar);
+    document.querySelectorAll('.social__comment>img')[i + m].setAttribute('alt', item.comments[i].name);
+    document.querySelectorAll('.social__text')[i + m].textContent = item.comments[i].message;
+  }
+};
 export const renderBigPhoto = (item) => {
   const dataComments = item.comments.slice();
   const amountComments = item.comments.length;
-  const renderComments = () => {
-    document.querySelector('.big-picture__img>img').setAttribute('src', item.url);
-    document.querySelector('.likes-count').textContent = item.likes;
-    document.querySelector('.social__caption').textContent = item.description;
-    socialCommentsCount.innerHTML = `${amountShownComments.length} из <span class="comments-count">${amountComments}</span> комментариев`;
-  };
-  //   количество показываемых комментариев для цикла - l-1, m - переменная для коррекции записи данных в новые комментарии, с учётом уже записанных
-  const renderTextComments = function (l, m) {
-    for (let i = 0; i <= l; i++) {
-      document.querySelectorAll('.social__comment>img')[i + m].setAttribute('src', item.comments[i].avatar);
-      document.querySelectorAll('.social__comment>img')[i + m].setAttribute('alt', item.comments[i].name);
-      document.querySelectorAll('.social__text')[i + m].textContent = item.comments[i].message;
-    }
-  };
-  renderComments();
-  renderTextComments(CORRECTED_DISPLAYED_COMMENTS, 0);
+  socialCommentsCount.innerHTML = `${amountShownComments.length} из <span class="comments-count">${amountComments}</span> комментариев`;
+  renderComments(item);
+  renderTextComments(CORRECTED_DISPLAYED_COMMENTS, 0, item);
   const templateComments = socialComments.innerHTML;
   const onButtonLoadCommentsClick = () => {
     viewedComments = viewedComments.concat(item.comments.splice(0, LIMIT_DISPLAYED_COMMENTS));
     if (item.comments.length < LIMIT_DISPLAYED_COMMENTS) {
       getNewSocialComments(item.comments.length);
-      renderTextComments(item.comments.length - 1, viewedComments.length);
+      renderTextComments(item.comments.length - 1, viewedComments.length, item);
       buttonLoaderComments.classList.add('hidden');
     } else {
       getNewSocialComments(LIMIT_DISPLAYED_COMMENTS);
-      renderTextComments(CORRECTED_DISPLAYED_COMMENTS, viewedComments.length);
+      renderTextComments(CORRECTED_DISPLAYED_COMMENTS, viewedComments.length, item);
       buttonLoaderComments.classList.remove('hidden');
     }
     socialCommentsCount.innerHTML = `${amountShownComments.length} из <span class="comments-count">${amountComments}</span> комментариев`;
