@@ -44,6 +44,10 @@ export const setOpenBigPhoto = () => {
     });
   });
 };
+const revertInitialDisplayedElementDom = () => {
+  socialComments.innerHTML = '';
+  socialComments.insertAdjacentHTML('beforeend', templateComments);
+};
 export const setCloseBigPhoto = () => {
   if (!photo.matches('hidden')) {
     document.addEventListener('keydown', onBigPhotoEscKey);
@@ -81,10 +85,6 @@ export const renderBigPhoto = (item) => {
     renderTextComments(item.comments.length - 1, 0, item);
     controlShowAmountComments(amountComments);
     window.console.log(item, item.comments.length, amountShownComments);
-    const revertInitialDisplayedElementDom = () => {
-      socialComments.innerHTML = '';
-      socialComments.insertAdjacentHTML('beforeend', templateComments);
-    };
     buttonCloseBigPhoto.addEventListener('click', () => revertInitialDisplayedElementDom());
     document.addEventListener('keydown', (evt) => {
       if (evt.key === 'Escape') {
