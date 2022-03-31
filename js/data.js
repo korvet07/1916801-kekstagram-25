@@ -35,6 +35,6 @@ const createDescriptionsPhotos = () => ({
   url: `photos/${makeCountValuePhoto(25)}.jpg`,
   description: 'Это мы на Гаваях)',
   likes: getRandomIntInclusive(15, 200),
-  comments: Array.from({ length: getRandomIntInclusive(13, 25) }, createComment),
+  comments: Array.from({ length: getRandomIntInclusive(1, 2) }, createComment),
 });
 export const getMockPhotos = () => Array.from({ length: COLLECTION_DESCRIPTIONS }, createDescriptionsPhotos);
