@@ -78,9 +78,10 @@ export const renderBigPhoto = (item) => {
   const dataComments = item.comments.slice();
   window.console.log(item, item.comments.length, amountShownComments.length);
   if (item.comments.length < LIMIT_DISPLAYED_COMMENTS) {
-    for (let i = 0; i < LIMIT_DISPLAYED_COMMENTS - item.comments.length; i++) {
+    for (let i = (LIMIT_DISPLAYED_COMMENTS - item.comments.length) -1 ; i >=0 ; i--) {
       socialComments.removeChild(amountShownComments[i]);
     }
+    window.console.log(item, item.comments.length, amountShownComments.length);
     buttonLoaderComments.classList.add('hidden');
     renderTextComments(item.comments.length - 1, 0, item);
     controlShowAmountComments(amountComments);
