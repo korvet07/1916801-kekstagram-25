@@ -34,7 +34,6 @@ const renderContentPhoto = (item) => {
   document.querySelector('.social__caption').textContent = item.description;
 };
 const renderContentComments = (item) => {
-  window.console.log(item.comments.length);
   const dataComments = item.comments;
   const fragment = new DocumentFragment();
   dataComments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).forEach((dataComment) => {
