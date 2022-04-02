@@ -18,10 +18,10 @@ const MESSAGE_COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 const COLLECTION_DESCRIPTIONS = 25;
-function createIdGenerator() {
+const createIdGenerator = () => {
   let sumCount = 0;
   return (n) => sumCount >= n ? 1 : ++sumCount;
-}
+};
 const makeCountIdDescription = createIdGenerator();
 const makeCountValuePhoto = createIdGenerator();
 const createComment = () => ({
@@ -35,6 +35,6 @@ const createDescriptionsPhotos = () => ({
   url: `photos/${makeCountValuePhoto(25)}.jpg`,
   description: 'Это мы на Гаваях)',
   likes: getRandomIntInclusive(15, 200),
-  comments: Array.from({ length: 13 }, createComment),
+  comments: Array.from({ length: getRandomIntInclusive(0, 24) }, createComment),
 });
 export const getMockPhotos = () => Array.from({ length: COLLECTION_DESCRIPTIONS }, createDescriptionsPhotos);
