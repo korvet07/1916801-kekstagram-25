@@ -45,7 +45,7 @@ const renderContentComments = (item) => {
   socialComments.append(fragment);
   offset = offset + item.comments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).length;
   controlShowAmountComments(item);
-  buttonLoaderComments.classList.toggle('hidden', (item.comments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).length < LIMIT_DISPLAYED_COMMENTS) && offset === item.comments.length || (item.comments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).length === LIMIT_DISPLAYED_COMMENTS && offset === item.comments.length));
+  buttonLoaderComments.classList.toggle('hidden', offset === item.comments.length);
 };
 export const setOpenBigPhoto = () => {
   const thumbnails = document.querySelectorAll('.picture');
