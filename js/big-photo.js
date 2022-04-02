@@ -25,23 +25,6 @@ const onBigPhotoEscKey = (evt) => {
 const onBigPhotoClick = () => {
   closeBigPhoto();
 };
-export const setOpenBigPhoto = () => {
-  const thumbnails = document.querySelectorAll('.picture');
-  thumbnails.forEach((thumbnail) => {
-    thumbnail.addEventListener('click', () => {
-      openBigPhoto();
-    });
-  });
-};
-export const setCloseBigPhoto = () => {
-  if (!photo.matches('hidden')) {
-    document.addEventListener('keydown', onBigPhotoEscKey);
-    buttonCloseBigPhoto.addEventListener('click', onBigPhotoClick);
-  } else {
-    document.removeEventListener('keydown', onBigPhotoEscKey);
-    buttonCloseBigPhoto.removeEventListener('click', onBigPhotoClick);
-  }
-};
 const controlShowAmountComments = (item) => {
   socialCommentsCount.innerHTML = `${offset} из <span class="comments-count">${item.comments.length}</span> комментариев`;
 };
@@ -64,6 +47,23 @@ const renderComments = (item) => {
   offset = offset + item.comments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).length;
   controlShowAmountComments(item);
   buttonLoaderComments.classList.toggle('hidden', (item.comments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).length < LIMIT_DISPLAYED_COMMENTS) && offset === item.comments.length || (item.comments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).length === LIMIT_DISPLAYED_COMMENTS && offset === item.comments.length));
+};
+export const setOpenBigPhoto = () => {
+  const thumbnails = document.querySelectorAll('.picture');
+  thumbnails.forEach((thumbnail) => {
+    thumbnail.addEventListener('click', () => {
+      openBigPhoto();
+    });
+  });
+};
+export const setCloseBigPhoto = () => {
+  if (!photo.matches('hidden')) {
+    document.addEventListener('keydown', onBigPhotoEscKey);
+    buttonCloseBigPhoto.addEventListener('click', onBigPhotoClick);
+  } else {
+    document.removeEventListener('keydown', onBigPhotoEscKey);
+    buttonCloseBigPhoto.removeEventListener('click', onBigPhotoClick);
+  }
 };
 export const renderBigPhoto = (item) => {
   socialComments.innerHTML = '';
