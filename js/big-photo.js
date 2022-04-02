@@ -33,7 +33,7 @@ const renderContentPhoto = (item) => {
   document.querySelector('.likes-count').textContent = item.likes;
   document.querySelector('.social__caption').textContent = item.description;
 };
-const renderComments = (item) => {
+const renderContentComments = (item) => {
   window.console.log(item.comments.length);
   const dataComments = item.comments;
   const fragment = new DocumentFragment();
@@ -68,9 +68,9 @@ export const setCloseBigPhoto = () => {
 export const renderBigPhoto = (item) => {
   socialComments.innerHTML = '';
   renderContentPhoto(item);
-  renderComments(item);
+  renderContentComments(item);
   const onButtonLoaderCommentsClick = () => {
-    renderComments(item);
+    renderContentComments(item);
   };
   buttonLoaderComments.addEventListener('click', onButtonLoaderCommentsClick);
   buttonCloseBigPhoto.addEventListener('click', () => {
