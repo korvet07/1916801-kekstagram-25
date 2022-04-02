@@ -5,14 +5,9 @@ const buttonLoaderComments = document.querySelector('.comments-loader');
 const buttonCloseBigPhoto = photo.querySelector('#picture-cancel');
 const socialCommentsCount = document.querySelector('.social__comment-count');
 const LIMIT_DISPLAYED_COMMENTS = 5;
-let offSet = 0;
-let viewedComments = [];
-const getNewSocialComments = (n) => {
-  for (let i = 1; i <= n; i++) {
-    socialComments.append(li.cloneNode(true));
-  }
-  return socialComments;
-};
+let offset = 0;
+const img = li.querySelector('img');
+const textComment = document.querySelector('.social__text');
 const closeBigPhoto = () => {
   photo.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -47,52 +42,46 @@ export const setCloseBigPhoto = () => {
     buttonCloseBigPhoto.removeEventListener('click', onBigPhotoClick);
   }
 };
-const renderPhoto = (item) => {
+const controlShowAmountComments = (item) => {
+  socialCommentsCount.innerHTML = `${offset} из <span class="comments-count">${item.comments.length}</span> комментариев`;
+};
+const renderContentPhoto = (item) => {
   document.querySelector('.big-picture__img>img').setAttribute('src', item.url);
   document.querySelector('.likes-count').textContent = item.likes;
   document.querySelector('.social__caption').textContent = item.description;
 };
-const renderTextComments = function (item) {
-  for (let i = 0; i < viewedComments.length; i++) {
-    document.querySelectorAll('.social__comment>img')[i + offSet].setAttribute('src', item.comments[i + offSet].avatar);
-    document.querySelectorAll('.social__comment>img')[i + offSet].setAttribute('alt', item.comments[i + offSet].name);
-    document.querySelectorAll('.social__text')[i + offSet].textContent = item.comments[i + offSet].message;
-  }
-};
-const controlShowAmountComments = (item) => {
-  socialCommentsCount.innerHTML = `${offSet} из <span class="comments-count">${item.comments.length}</span> комментариев`;
-};
-const controlRenderComments = (item) => {
-  viewedComments = item.comments.slice(offSet, offSet + LIMIT_DISPLAYED_COMMENTS);
-  getNewSocialComments(viewedComments.length);
-  renderTextComments(item);
-  offSet = offSet + viewedComments.length;
+const renderComments = (item) => {
+  window.console.log(item.comments.length);
+  const dataComments = item.comments;
+  const fragment = new DocumentFragment();
+  dataComments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).forEach((dataComment) => {
+    fragment.append(li.cloneNode(true));
+    img.setAttribute('src', dataComment.avatar);
+    img.setAttribute('alt', dataComment.name);
+    textComment.textContent = dataComment.message;
+  });
+  socialComments.append(fragment);
+  offset = offset + item.comments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).length;
   controlShowAmountComments(item);
-  if (viewedComments.length < LIMIT_DISPLAYED_COMMENTS || (viewedComments.length === LIMIT_DISPLAYED_COMMENTS && offSet === item.comments.length)) {
-    buttonLoaderComments.classList.add('hidden');
-  } else {
-    buttonLoaderComments.classList.remove('hidden');
-  }
+  buttonLoaderComments.classList.toggle('hidden', (item.comments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).length < LIMIT_DISPLAYED_COMMENTS) && offset === item.comments.length || (item.comments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).length === LIMIT_DISPLAYED_COMMENTS && offset === item.comments.length));
 };
 export const renderBigPhoto = (item) => {
-  renderPhoto(item);
   socialComments.innerHTML = '';
-  controlRenderComments(item);
+  renderContentPhoto(item);
+  renderComments(item);
   const onButtonLoaderCommentsClick = () => {
-    controlRenderComments(item);
+    renderComments(item);
   };
   buttonLoaderComments.addEventListener('click', onButtonLoaderCommentsClick);
   buttonCloseBigPhoto.addEventListener('click', () => {
-    offSet = 0;
-    viewedComments.length = 0;
+    offset = 0;
     buttonLoaderComments.removeEventListener('click', onButtonLoaderCommentsClick);
     closeBigPhoto();
   });
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
-      offSet = 0;
-      viewedComments.length = 0;
+      offset = 0;
       buttonLoaderComments.removeEventListener('click', onButtonLoaderCommentsClick);
     }
   });
