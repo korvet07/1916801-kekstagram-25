@@ -52,6 +52,13 @@ noUiSlider.create(sliderElement, {
 sliderElement.noUiSlider.on('update', () => {
   valueElement.setAttribute('value', sliderElement.noUiSlider.get());
 });
+document.querySelectorAll('.effects__radio').forEach((element) => {
+  element.addEventListener('change', (evt) => {
+    if(evt.target.checked){
+      imgUploadPreview.className =`effects__preview--${element.value}`;
+    }
+  });
+});
 export const setScaleEffectsPhoto = () => {
   inputEffectNone.addEventListener('focus', () => {
     imgUploadPreview.removeAttribute('style');
