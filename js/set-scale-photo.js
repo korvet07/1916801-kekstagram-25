@@ -11,27 +11,31 @@ const inputEffectPhobos = document.querySelector('#effect-phobos');
 const inputEffectHeat = document.querySelector('#effect-heat');
 const inputEffectMarvin = document.querySelector('#effect-marvin');
 export const setScaleSizePhoto = () => {
+  const stepEndMinSize = 25;
+  const maxSize = 100;
+  const coefficientCorrectStyleValue = 0.01;
   inputScaleSizePhoto.value = '100%';
   let valueSize = parseInt(inputScaleSizePhoto.value.match(/\d+/), 10);
   const setShowScale = () => {
     inputScaleSizePhoto.value = `${valueSize}%`;
-    imgUploadPreview.style.transform = `scale(${valueSize * 0.01})`;
+    imgUploadPreview.style.transform = `scale(${valueSize * coefficientCorrectStyleValue
+    })`;
   };
   const onButtonSmallerSizeClick = () => {
-    if (valueSize === 25) {
+    if (valueSize === stepEndMinSize) {
       setShowScale();
     } else {
-      valueSize = valueSize - 25;
+      valueSize = valueSize - stepEndMinSize;
       setShowScale();
       return valueSize;
     }
   };
   buttonSmallerSize.addEventListener('click', onButtonSmallerSizeClick);
   const onButtonBiggerSizeClick = () => {
-    if (valueSize === 100) {
+    if (valueSize === maxSize) {
       setShowScale();
     } else {
-      valueSize = valueSize + 25;
+      valueSize = valueSize + stepEndMinSize;
       setShowScale();
     }
   };
@@ -58,31 +62,40 @@ document.querySelectorAll('.effects__radio').forEach((element) => {
     }
   });
 });
-const updateOptionsForPhobosHeat = () => sliderElement.noUiSlider.updateOptions({
-  range: {
-    min: 0,
-    max: 3,
-  },
-  start: 3,
-  step: 0.1,
-});
-const updateOptionsForChromeSepia = () => sliderElement.noUiSlider.updateOptions({
-  range: {
-    min: 0,
-    max: 1,
-  },
-  start: 1,
-  step: 0.1
-});
+const updateOptionsForPhobosHeat = () => {
+  sliderElement.removeAttribute('disabled');
+  sliderElement.noUiSlider.updateOptions({
+    range: {
+      min: 0,
+      max: 3,
+    },
+    start: 3,
+    step: 0.1,
+  });
+};
+const updateOptionsForChromeSepia = () => {
+  sliderElement.removeAttribute('disabled');
+  sliderElement.noUiSlider.updateOptions({
+    range: {
+      min: 0,
+      max: 1,
+    },
+    start: 1,
+    step: 0.1
+  });
+};
 export const setScaleEffectsPhoto = () => {
-  inputEffectNone.addEventListener('focus', () => {
-    imgUploadPreview.setAttribute('style', `transform: scale(${inputScaleSizePhoto.value})`);
-    sliderElement.setAttribute('disabled', true);
+  const setScaleEffectNone = () => {
+    if (inputEffectNone.checked) {
+      imgUploadPreview.setAttribute('style', `transform: scale(${inputScaleSizePhoto.value})`);
+      sliderElement.setAttribute('disabled', true);
+    }
+  };
+  setScaleEffectNone();
+  inputEffectNone.addEventListener('change', () => {
+    setScaleEffectNone();
   });
-  inputEffectNone.addEventListener('blur', () => {
-    sliderElement.removeAttribute('disabled');
-  });
-  inputEffectChrome.addEventListener('change', (evt) => {
+  const setScaleEffectChrome = (evt) => {
     if (evt.target.checked) {
       updateOptionsForChromeSepia();
       sliderElement.noUiSlider.on('update', () => {
@@ -90,6 +103,9 @@ export const setScaleEffectsPhoto = () => {
         valueElement.setAttribute('value', sliderElement.noUiSlider.get());
       });
     }
+  };
+  inputEffectChrome.addEventListener('change', (evt) => {
+    setScaleEffectChrome(evt);
   });
   inputEffectSepia.addEventListener('change', (evt) => {
     if (evt.target.checked) {
@@ -102,6 +118,7 @@ export const setScaleEffectsPhoto = () => {
   });
   inputEffectMarvin.addEventListener('change', (evt) => {
     if (evt.target.checked) {
+      sliderElement.removeAttribute('disabled');
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 0,
