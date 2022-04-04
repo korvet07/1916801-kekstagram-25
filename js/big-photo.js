@@ -34,13 +34,12 @@ const renderContentPhoto = (item) => {
   document.querySelector('.social__caption').textContent = item.description;
 };
 const renderContentComments = (item) => {
-  const dataComments = item.comments;
   const fragment = new DocumentFragment();
-  dataComments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).forEach((dataComment) => {
+  item.comments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).forEach((comment) => {
     fragment.append(li.cloneNode(true));
-    img.setAttribute('src', dataComment.avatar);
-    img.setAttribute('alt', dataComment.name);
-    textComment.textContent = dataComment.message;
+    img.setAttribute('src', comment.avatar);
+    img.setAttribute('alt', comment.name);
+    textComment.textContent = comment.message;
   });
   socialComments.append(fragment);
   offset = offset + item.comments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).length;
@@ -64,6 +63,10 @@ export const setCloseBigPhoto = () => {
     buttonCloseBigPhoto.removeEventListener('click', onBigPhotoClick);
   }
 };
+const resetCacheLoadComments = (onButtonLoaderCommentsClick) => {
+  offset = 0;
+  buttonLoaderComments.removeEventListener('click', onButtonLoaderCommentsClick);
+};
 export const renderBigPhoto = (item) => {
   socialComments.innerHTML = '';
   renderContentPhoto(item);
@@ -73,15 +76,13 @@ export const renderBigPhoto = (item) => {
   };
   buttonLoaderComments.addEventListener('click', onButtonLoaderCommentsClick);
   buttonCloseBigPhoto.addEventListener('click', () => {
-    offset = 0;
-    buttonLoaderComments.removeEventListener('click', onButtonLoaderCommentsClick);
+    resetCacheLoadComments(onButtonLoaderCommentsClick);
     closeBigPhoto();
   });
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
-      offset = 0;
-      buttonLoaderComments.removeEventListener('click', onButtonLoaderCommentsClick);
+      resetCacheLoadComments(onButtonLoaderCommentsClick);
     }
   });
 };

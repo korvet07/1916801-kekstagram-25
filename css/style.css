@@ -1204,7 +1204,12 @@ main {
 /**
  * Экраны ошибки и успеха загрузки изображения
  */
-
+.pristine-error{
+  background-color: rgb(242, 210, 210);
+  color: rgb(235, 17, 17);
+  font-weight: bold;
+  padding: 5px 0;
+}
 .error,
 .success {
   position: fixed;
