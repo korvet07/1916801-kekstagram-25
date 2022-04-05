@@ -5,11 +5,14 @@ const formAddedPhoto = document.querySelector('#upload-select-image');
 const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
 const commentsInput = formAddedPhoto.querySelector('.text__description');
 const resetValueInputs = () => {
-  formAddedPhoto.reset();
+  hashtagsInput.value = '';
+  commentsInput.value = '';
+  document.querySelector('.scale__control--value').value = '100%';
 };
 const onControllerFormChange = () => {
   overlayForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
+  resetValueInputs();
 };
 const closeForm = () => {
   overlayForm.classList.add('hidden');
@@ -22,7 +25,6 @@ const onCloseFormEscKey = (evt) => {
   if (evt.key === 'Escape' && evt.target !== hashtagsInput && evt.target !== commentsInput) {
     evt.preventDefault();
     closeForm();
-    resetValueInputs();
   }
   else {
     document.body.classList.add('modal-open');
