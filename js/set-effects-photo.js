@@ -43,25 +43,6 @@ export const setScaleSizePhoto = () => {
     onButtonBiggerSizeClick();
   });
 };
-noUiSlider.create(sliderElement, {
-  range: {
-    min: 0,
-    max: 1,
-  },
-  start: 1,
-  step: 0.1,
-  connect: 'lower',
-});
-sliderElement.noUiSlider.on('update', () => {
-  valueElement.setAttribute('value', sliderElement.noUiSlider.get());
-});
-document.querySelectorAll('.effects__radio').forEach((element) => {
-  element.addEventListener('change', (evt) => {
-    if (evt.target.checked) {
-      imgUploadPreview.className = `effects__preview--${element.value}`;
-    }
-  });
-});
 const updateOptionsForPhobosHeat = () => {
   sliderElement.removeAttribute('disabled');
   sliderElement.noUiSlider.updateOptions({
@@ -85,6 +66,25 @@ const updateOptionsForChromeSepia = () => {
   });
 };
 export const setScaleEffectsPhoto = () => {
+  noUiSlider.create(sliderElement, {
+    range: {
+      min: 0,
+      max: 1,
+    },
+    start: 1,
+    step: 0.1,
+    connect: 'lower',
+  });
+  sliderElement.noUiSlider.on('update', () => {
+    valueElement.setAttribute('value', sliderElement.noUiSlider.get());
+  });
+  document.querySelectorAll('.effects__radio').forEach((element) => {
+    element.addEventListener('change', (evt) => {
+      if (evt.target.checked) {
+        imgUploadPreview.className = `effects__preview--${element.value}`;
+      }
+    });
+  });
   const setScaleEffectNone = () => {
     if (inputEffectNone.checked) {
       imgUploadPreview.setAttribute('style', `transform: scale(${inputScaleSizePhoto.value})`);
