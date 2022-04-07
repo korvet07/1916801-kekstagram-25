@@ -8,6 +8,9 @@ const resetValueInputs = () => {
   hashtagsInput.value = '';
   commentsInput.value = '';
   document.querySelector('.scale__control--value').value = '100%';
+  document.querySelector('.img-upload__preview>img').setAttribute('style', 'transform: scale(100%)');
+  document.querySelector('.effect-level__slider').setAttribute('disabled', true);
+  document.querySelector('.img-upload__preview>img').className = 'effects__preview--none';
 };
 const onControllerFormChange = () => {
   overlayForm.classList.remove('hidden');

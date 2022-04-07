@@ -43,15 +43,21 @@ export const setScaleSizePhoto = () => {
     onButtonBiggerSizeClick();
   });
 };
-const updateOptionsForPhobosHeat = () => {
-  sliderElement.removeAttribute('disabled');
-  sliderElement.noUiSlider.updateOptions({
-    range: {
-      min: 0,
-      max: 3,
-    },
-    start: 3,
-    step: 0.1,
+const updateOptionsForPhobosHeat = (evt, filter, unit = '', min = 1) => {
+  if (evt.target.checked) {
+    sliderElement.removeAttribute('disabled');
+    sliderElement.noUiSlider.updateOptions({
+      range: {
+        min: min,
+        max: 3,
+      },
+      start: 3,
+      step: 0.1,
+    });
+  }
+  sliderElement.noUiSlider.on('update', () => {
+    imgUploadPreview.setAttribute('style', `filter: ${filter}(${valueElement.value}${unit}); transform: scale(${inputScaleSizePhoto.value})`);
+    valueElement.setAttribute('value', sliderElement.noUiSlider.get());
   });
 };
 const updateOptionsForChromeSepia = () => {
@@ -128,27 +134,16 @@ export const setScaleEffectsPhoto = () => {
         step: 1,
       });
       sliderElement.noUiSlider.on('update', () => {
-        imgUploadPreview.setAttribute('style', `filter: invert(${valueElement.value}%); transform: scale(${inputScaleSizePhoto.value})`);
+        imgUploadPreview.setAttribute('style', `filter: invert(${Math.trunc(valueElement.value)}%); transform: scale(${inputScaleSizePhoto.value})`);
         valueElement.setAttribute('value', sliderElement.noUiSlider.get());
       });
     }
   });
+
   inputEffectPhobos.addEventListener('change', (evt) => {
-    if (evt.target.checked) {
-      updateOptionsForPhobosHeat();
-      sliderElement.noUiSlider.on('update', () => {
-        imgUploadPreview.setAttribute('style', `filter: blur(${valueElement.value}px); transform: scale(${inputScaleSizePhoto.value})`);
-        valueElement.setAttribute('value', sliderElement.noUiSlider.get());
-      });
-    }
+    updateOptionsForPhobosHeat(evt, 'blur', 'px', 0);
   });
   inputEffectHeat.addEventListener('change', (evt) => {
-    if (evt.target.checked) {
-      updateOptionsForPhobosHeat();
-      sliderElement.noUiSlider.on('update', () => {
-        imgUploadPreview.setAttribute('style', `filter: brightness(${valueElement.value}); transform: scale(${inputScaleSizePhoto.value})`);
-        valueElement.setAttribute('value', sliderElement.noUiSlider.get());
-      });
-    }
+    updateOptionsForPhobosHeat(evt, 'brightness');
   });
 };
