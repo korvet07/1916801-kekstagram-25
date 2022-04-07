@@ -4,9 +4,18 @@ const closeFormButton = document.querySelector('.img-upload__cancel');
 const formAddedPhoto = document.querySelector('#upload-select-image');
 const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
 const commentsInput = formAddedPhoto.querySelector('.text__description');
+const pristine = new Pristine(formAddedPhoto, {
+  classTo: 'form-upload__error',
+  errorClass: 'img-upload__text--invalid',
+  successClass: 'img-upload__text--valid',
+  errorTextParent: 'form-upload__error',
+  errorTextTag: 'div',
+  errorTextClass: 'img-upload__text',
+});
 const resetValueInputs = () => {
   hashtagsInput.value = '';
   commentsInput.value = '';
+  pristine.validate();
   document.querySelector('.scale__control--value').value = '100%';
   document.querySelector('.img-upload__preview>img').setAttribute('style', 'transform: scale(100%)');
   document.querySelector('.effect-level__slider').setAttribute('disabled', true);
@@ -67,14 +76,6 @@ const checkAmountHashtag = () => {
   return hashtags.length <= 5;
 };
 export const validateForm = () => {
-  const pristine = new Pristine(formAddedPhoto, {
-    classTo: 'form-upload__error',
-    errorClass: 'img-upload__text--invalid',
-    successClass: 'img-upload__text--valid',
-    errorTextParent: 'form-upload__error',
-    errorTextTag: 'div',
-    errorTextClass: 'img-upload__text',
-  });
   pristine.addValidator(hashtagsInput, checkLengthHashtag, 'Hе более 20 символов в 1 хештеге!');
   pristine.addValidator(hashtagsInput, checkSymbolHashtags, 'Хештеги должны начинаться с # или недопустимые символы в хештеге');
   pristine.addValidator(hashtagsInput, checkComparisonHashtags, 'Одинаковые хештеги не допустимы!');
