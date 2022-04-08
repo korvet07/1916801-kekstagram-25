@@ -9,24 +9,19 @@ export const getData = (renderPhotos, setOpenBigPhoto, setCloseBigPhoto, showAle
     .catch(() => showAlert('Ошибка загрузки фото, перезагрузите страницу!'));
 };
 export const sendData = (formData, onMessage, closeForm, unblockSubmitButton) => {
-  fetch(' https://25.javascript.pages.academy/kekstagram',
+  fetch(' https://25.javascript.pages.academ/kekstagram',
     {
       method: 'POST',
       body: formData,
     })
     .then((response) => {
-      window.console.log(response.ok);
       if (response.ok) {
         onMessage('success');
       } else {
-        closeForm();
         onMessage('error');
       }
     })
     .then(() => unblockSubmitButton())
-    .then(() => closeForm())
-    .catch(() => {
-      closeForm();
-      onMessage('error');
-    });
+    .catch(() => onMessage('error'))
+    .finally(() => closeForm());
 };
