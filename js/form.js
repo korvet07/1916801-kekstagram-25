@@ -1,4 +1,5 @@
 import { onMessage } from './message.js';
+import { sendData } from './api.js';
 const controllerForm = document.querySelector('#upload-file');
 const overlayForm = document.querySelector('.img-upload__overlay');
 const closeFormButton = document.querySelector('.img-upload__cancel');
@@ -100,26 +101,7 @@ export const setUserFormSubmit = () => {
     if (pristine.validate()) {
       blockSubmitButton();
       const formData = new FormData(evt.target);
-      fetch(' https://25.javascript.pages.academy/kekstagram',
-        {
-          method: 'POST',
-          body: formData,
-        },)
-        .then((response) => {
-          window.console.log(response.ok);
-          if (response.ok) {
-            onMessage('success');
-          } else {
-            closeForm();
-            onMessage('error');
-          }
-        })
-        .then(() => unblockSubmitButton())
-        .then(() => closeForm())
-        .catch(() => {
-          closeForm();
-          onMessage('error');
-        });
+      sendData(formData, onMessage, closeForm, unblockSubmitButton);
     }
   });
 };
