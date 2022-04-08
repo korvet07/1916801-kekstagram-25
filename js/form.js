@@ -1,9 +1,11 @@
+import { onMessage } from './message.js';
 const controllerForm = document.querySelector('#upload-file');
 const overlayForm = document.querySelector('.img-upload__overlay');
 const closeFormButton = document.querySelector('.img-upload__cancel');
 const formAddedPhoto = document.querySelector('#upload-select-image');
 const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
 const commentsInput = formAddedPhoto.querySelector('.text__description');
+const submitButton = formAddedPhoto.querySelector('.img-upload__submit');
 const pristine = new Pristine(formAddedPhoto, {
   classTo: 'form-upload__error',
   errorClass: 'img-upload__text--invalid',
@@ -16,7 +18,7 @@ const resetValueInputs = () => {
   hashtagsInput.value = '';
   commentsInput.value = '';
   pristine.validate();
-  document.querySelector('.scale__control--value').value = '100%';
+  document.getElementsByClassName('effect-level__value')[0].setAttribute('value', '1');
   document.querySelector('.img-upload__preview>img').setAttribute('style', 'transform: scale(100%)');
   document.querySelector('.effect-level__slider').setAttribute('disabled', true);
   document.querySelector('.img-upload__preview>img').className = 'effects__preview--none';
@@ -29,6 +31,7 @@ const onControllerFormChange = () => {
 const closeForm = () => {
   overlayForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  controllerForm.value = '';
 };
 const onCloseFormButtonClick = () => {
   closeForm();
@@ -75,15 +78,48 @@ const checkAmountHashtag = () => {
   const hashtags = hashtagsInput.value.split(' ');
   return hashtags.length <= 5;
 };
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Публикация...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
 export const validateForm = () => {
   pristine.addValidator(hashtagsInput, checkLengthHashtag, 'Hе более 20 символов в 1 хештеге!');
   pristine.addValidator(hashtagsInput, checkSymbolHashtags, 'Хештеги должны начинаться с # или недопустимые символы в хештеге');
   pristine.addValidator(hashtagsInput, checkComparisonHashtags, 'Одинаковые хештеги не допустимы!');
   pristine.addValidator(hashtagsInput, checkAmountHashtag, 'Не более 5 хештегов!');
   pristine.addValidator(commentsInput, checkLengthString, 'Не более 140 символов');
+};
+export const setUserFormSubmit = () => {
   formAddedPhoto.addEventListener('submit', (evt) => {
-    if (!pristine.validate(hashtagsInput) || !pristine.validate(commentsInput)) {
-      evt.preventDefault();
+    evt.preventDefault();
+    if (pristine.validate()) {
+      blockSubmitButton();
+      const formData = new FormData(evt.target);
+      fetch(' https://25.javascript.pages.academy/kekstagram',
+        {
+          method: 'POST',
+          body: formData,
+        },)
+        .then((response) => {
+          window.console.log(response.ok);
+          if (response.ok) {
+            onMessage('success');
+          } else {
+            closeForm();
+            onMessage('error');
+          }
+        })
+        .then(() => unblockSubmitButton())
+        .then(() => closeForm())
+        .catch(() => {
+          closeForm();
+          onMessage('error');
+        });
     }
   });
 };
