@@ -21,7 +21,7 @@ export const sendData = (formData, onMessage, closeForm, unblockSubmitButton) =>
         onMessage('error');
       }
     })
-    .then(() => unblockSubmitButton())
     .catch(() => onMessage('error'))
-    .finally(() => closeForm());
+    .finally(() => closeForm())
+    .then(() => unblockSubmitButton());
 };
