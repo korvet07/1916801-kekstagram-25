@@ -25,10 +25,11 @@ export const showAlert = (message) => {
   alertContainer.style.left = 0;
   alertContainer.style.top = 0;
   alertContainer.style.right = 0;
-  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.padding = '20px 5px';
   alertContainer.style.fontSize = '40px';
   alertContainer.style.textAlign = 'center';
   alertContainer.style.backgroundColor = 'red';
+  alertContainer.style.color = 'black';
   alertContainer.textContent = message;
   document.body.append(alertContainer);
 

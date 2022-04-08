@@ -1,5 +1,5 @@
 export const getData = (renderPhotos, setOpenBigPhoto, setCloseBigPhoto, showAlert) => {
-  fetch('https://25.javascript.pages.academy/kekstagram/data')
+  fetch('https://25.javascript.pages.academ/kekstagram/data')
     .then((response) => response.json())
     .then((data) => {
       renderPhotos(data);
