@@ -93,7 +93,9 @@ export const setScaleEffectsPhoto = () => {
   });
   const setScaleEffectNone = () => {
     if (inputEffectNone.checked) {
+      sliderElement.noUiSlider.set(100);
       imgUploadPreview.setAttribute('style', `transform: scale(${inputScaleSizePhoto.value})`);
+      sliderElement.setAttribute('disabled','true');
     }
   };
   setScaleEffectNone();
