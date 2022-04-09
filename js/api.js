@@ -8,7 +8,7 @@ export const getData = (renderPhotos, setOpenBigPhoto, setCloseBigPhoto, showAle
     })
     .catch(() => showAlert('Ошибка загрузки фото, перезагрузите страницу!'));
 };
-export const sendData = (formData, onMessage, closeForm, unblockSubmitButton) => {
+export const sendData = (formData, onMessage, closeForm, unblockSubmitButton, resetValueInputs) => {
   fetch(' https://25.javascript.pages.academy/kekstagram',
     {
       method: 'POST',
@@ -23,5 +23,6 @@ export const sendData = (formData, onMessage, closeForm, unblockSubmitButton) =>
     })
     .catch(() => onMessage('error'))
     .finally(() => closeForm())
-    .then(() => unblockSubmitButton());
+    .then(() => unblockSubmitButton())
+    .then(() => resetValueInputs());
 };
