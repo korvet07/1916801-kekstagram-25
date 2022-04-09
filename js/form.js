@@ -34,6 +34,7 @@ const closeForm = () => {
   overlayForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
   controllerForm.value = '';
+  document.querySelector('.scale__control--value').value = '100%';
   document.querySelector('#effect-none').checked = true;
 };
 const onCloseFormButtonClick = () => {
