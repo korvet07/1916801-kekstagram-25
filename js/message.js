@@ -18,7 +18,7 @@ export const onSendStatus = (type) => {
     }
   }, { once: true });
 };
-export const showAlert = (message) => {
+export const onError = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
   alertContainer.style.position = 'absolute';
@@ -36,7 +36,4 @@ export const showAlert = (message) => {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
-};
-export const onError = (message) => {
-  showAlert(message);
 };

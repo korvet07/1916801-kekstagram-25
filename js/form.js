@@ -105,7 +105,7 @@ export const setUserFormSubmit = () => {
       blockSubmitButton();
       sendData(
         new FormData(evt.target),
-        (type) =>  onSendStatus(type),
+        (type) => onSendStatus(type),
         () => closeForm(),
         () => unblockSubmitButton(),
         () => resetValueInputs(),

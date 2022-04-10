@@ -1,4 +1,4 @@
-export const getData = (onSuccess,  onError) => {
+export const getData = (onSuccess, onError) => {
   fetch('https://25.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
     .then((data) => onSuccess(data))
