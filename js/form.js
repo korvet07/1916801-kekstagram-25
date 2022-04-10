@@ -45,9 +45,6 @@ const onCloseFormEscKey = (evt) => {
     evt.preventDefault();
     closeForm();
   }
-  else {
-    document.body.classList.add('modal-open');
-  }
 };
 const addListenerCloseButton = () => {
   closeFormButton.addEventListener('click', onCloseFormButtonClick);
