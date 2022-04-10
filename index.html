@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link href="nouislider/nouislider.css" rel="stylesheet">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="modulepreload" href="js/main.js" as="script" crossorigin="anonymous">
   <title>Кекстаграм</title>
 </head>
 
@@ -75,8 +76,8 @@
                 <fieldset class="img-upload__effects  effects">
                   <ul class="effects__list">
                     <li class="effects__item">
-                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-none" autofocus
-                        value="none" checked>
+                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-none"
+                        autofocus value="none" checked>
                       <label for="effect-none" class="effects__label">
                         <span class="effects__preview  effects__preview--none">Превью фото без эффекта</span>
                         Оригинал
@@ -136,7 +137,7 @@
                   <div for="" class="form-upload__error">
                     <textarea class="text__description" name="description" placeholder="Ваш комментарий..."
                       data-pristine-maxlength="140"
-                      data-pristine-max-message="Превышено максимальное число символов 140" ></textarea>
+                      data-pristine-max-message="Превышено максимальное число символов 140"></textarea>
                   </div>
                 </fieldset>
 
@@ -258,9 +259,9 @@
   <template id="messages">
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
-  <script src="nouislider/nouislider.js"></script>
-  <script src="pristine/pristine.min.js"></script>
-  <script src="js/main.js" type="module"></script>
+  <script defer src="nouislider/nouislider.js"></script>
+  <script defer src="pristine/pristine.min.js"></script>
+  <script defer src="js/main.js" type="module"></script>
 </body>
 
 </html>
