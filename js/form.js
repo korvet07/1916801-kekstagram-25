@@ -1,4 +1,4 @@
-import { onMessage } from './message.js';
+import { onSendStatus } from './message.js';
 import { sendData } from './api.js';
 const controllerForm = document.querySelector('#upload-file');
 const overlayForm = document.querySelector('.img-upload__overlay');
@@ -103,8 +103,13 @@ export const setUserFormSubmit = () => {
     evt.preventDefault();
     if (pristine.validate()) {
       blockSubmitButton();
-      const formData = new FormData(evt.target);
-      sendData(formData, onMessage, closeForm, unblockSubmitButton, resetValueInputs);
+      sendData(
+        new FormData(evt.target),
+        (type) =>  onSendStatus(type),
+        () => closeForm(),
+        () => unblockSubmitButton(),
+        () => resetValueInputs(),
+      );
     }
   });
 };

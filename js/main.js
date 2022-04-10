@@ -1,10 +1,9 @@
-import { renderPhotos } from './render-photos.js';
-import { setCloseBigPhoto, setOpenBigPhoto } from './big-photo.js';
+import {  onDataLoaded } from './render-photos.js';
 import { setOverlayForm, validateForm, setUserFormSubmit } from './form.js';
 import { setScaleSizePhoto, setScaleEffectsPhoto } from './set-effects-photo.js';
-import { showAlert } from './message.js';
+import { onError } from './message.js';
 import { getData } from './api.js';
-getData(renderPhotos, setOpenBigPhoto, setCloseBigPhoto, showAlert);
+getData(onDataLoaded, onError);
 validateForm();
 setOverlayForm();
 setScaleSizePhoto();

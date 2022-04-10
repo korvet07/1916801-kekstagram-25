@@ -1,5 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
-export const onMessage = (type) => {
+export const onSendStatus = (type) => {
   const templateSuccess = document.querySelector(`#${type}`).content.cloneNode(true);
   document.body.append(templateSuccess);
   const popup = document.querySelector(`.${type}__inner`);
@@ -36,4 +36,7 @@ export const showAlert = (message) => {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
+};
+export const onError = (message) => {
+  showAlert(message);
 };

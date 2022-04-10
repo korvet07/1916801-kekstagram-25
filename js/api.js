@@ -1,28 +1,24 @@
-export const getData = (renderPhotos, setOpenBigPhoto, setCloseBigPhoto, showAlert) => {
+export const getData = (onSuccess,  onError) => {
   fetch('https://25.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
-    .then((data) => {
-      renderPhotos(data);
-      setOpenBigPhoto();
-      setCloseBigPhoto();
-    })
-    .catch(() => showAlert('Ошибка загрузки фото, перезагрузите страницу!'));
+    .then((data) => onSuccess(data))
+    .catch(() => onError('Ошибка загрузки фото, перезагрузите страницу!'));
 };
-export const sendData = (formData, onMessage, closeForm, unblockSubmitButton, resetValueInputs) => {
+export const sendData = (body, onSendStatus, onFinally, onMoreAction, onSomeMoreAction) => {
   fetch(' https://25.javascript.pages.academy/kekstagram',
     {
       method: 'POST',
-      body: formData,
+      body: body,
     })
     .then((response) => {
       if (response.ok) {
-        onMessage('success');
+        onSendStatus('success');
       } else {
-        onMessage('error');
+        onSendStatus('error');
       }
     })
-    .catch(() => onMessage('error'))
-    .finally(() => closeForm())
-    .then(() => unblockSubmitButton())
-    .then(() => resetValueInputs());
+    .catch(() => onSendStatus('error'))
+    .finally(() => onFinally())
+    .then(() => onMoreAction())
+    .then(() => onSomeMoreAction());
 };
