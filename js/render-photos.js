@@ -1,4 +1,4 @@
-import { renderBigPhoto } from './big-photo.js';
+import { renderBigPhoto, setOpenBigPhoto, setCloseBigPhoto } from './big-photo.js';
 const template = document.querySelector('#picture').content.querySelector('.picture');
 const container = document.querySelector('.pictures');
 const elementFragment = document.createDocumentFragment();
@@ -18,4 +18,9 @@ export const renderPhotos = (items) => {
     elementFragment.append(thumbnail);
   });
   return container.append(elementFragment);
+};
+export const onDataLoaded = (data) => {
+  renderPhotos(data);
+  setOpenBigPhoto();
+  setCloseBigPhoto();
 };
