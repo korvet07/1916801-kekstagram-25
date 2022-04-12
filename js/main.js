@@ -3,6 +3,7 @@ import { setOverlayForm, validateForm, setUserFormSubmit } from './form.js';
 import { setScaleSizePhoto, setScaleEffectsPhoto } from './set-effects-photo.js';
 import { onError } from './message.js';
 import { getData } from './api.js';
+import './filters.js';
 getData(onDataLoaded, onError);
 validateForm();
 setOverlayForm();
