@@ -1,18 +1,19 @@
-import { onRenderRandomPhotos, onRenderDefaultPhotos, onRenderDiscussedPhotos } from './filters.js';
+import { onRenderRandomPhotos, onRenderDefaultPhotos, onRenderDiscussedPhotos, debounce } from './filters.js';
+const RERENDER_DELAY = 500;
 export const getData = (onSuccess, onError) => {
   fetch('https://25.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
     .then((data) => {
       const allPhotos = data.slice();
       onSuccess(allPhotos);
-      onRenderDefaultPhotos(() => {
+      onRenderDefaultPhotos(debounce(() => {
         document.querySelectorAll('.picture').forEach((picture) => { picture.remove(); });
         onSuccess(allPhotos);
-      });
+      }, RERENDER_DELAY));
       return data;
     })
     .then((data) => {
-      onRenderDiscussedPhotos(() => {
+      onRenderDiscussedPhotos(debounce(() => {
         document.querySelectorAll('.picture').forEach((picture) => { picture.remove(); });
         const discussedPhotos = data.slice().sort((a, b) => {
           if (a.likes === b.likes) {
@@ -21,16 +22,16 @@ export const getData = (onSuccess, onError) => {
           return a.likes < b.likes ? 1 : -1;
         });
         onSuccess(discussedPhotos);
-      });
+      }, RERENDER_DELAY));
       return data;
     })
-    .then((photos) => onRenderRandomPhotos( () => {
+    .then((photos) => onRenderRandomPhotos(debounce(() => {
       window.console.log(photos);
       document.querySelectorAll('.picture').forEach((picture) => { picture.remove(); });
       const randomPhotos = photos.slice().sort(() => Math.random() - 0.5).slice(0, 10);
       window.console.log(randomPhotos);
       onSuccess(randomPhotos);
-    }))
+    }, RERENDER_DELAY)))
     .catch(() => onError('Ошибка загрузки фото, перезагрузите страницу!'));
 };
 export const sendData = (body, onSendStatus, onFinally, onMoreAction, onSomeMoreAction) => {
