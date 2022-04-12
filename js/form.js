@@ -1,5 +1,6 @@
 import { onSendStatus } from './message.js';
 import { sendData } from './api.js';
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const controllerForm = document.querySelector('#upload-file');
 const overlayForm = document.querySelector('.img-upload__overlay');
 const closeFormButton = document.querySelector('.img-upload__cancel');
@@ -29,6 +30,12 @@ const onControllerFormChange = () => {
   overlayForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
   resetValueInputs();
+  const file = controllerForm.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    document.querySelector('.img-upload__preview>img').src = URL.createObjectURL(file);
+  }
 };
 const closeForm = () => {
   overlayForm.classList.add('hidden');
@@ -115,7 +122,6 @@ export const setOverlayForm = () => {
   if (!overlayForm.matches('hidden')) {
     addListenerCloseButton();
     document.addEventListener('keydown', onCloseFormEscKey);
-
   } else {
     document.removeEventListener('keydown', onCloseFormEscKey);
     removeListenerCloseButton();
