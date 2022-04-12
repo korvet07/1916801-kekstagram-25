@@ -1,10 +1,12 @@
-import {  onDataLoaded } from './render-photos.js';
+import { onDataLoaded } from './render-photos.js';
 import { setOverlayForm, validateForm, setUserFormSubmit } from './form.js';
 import { setScaleSizePhoto, setScaleEffectsPhoto } from './set-effects-photo.js';
 import { onError } from './message.js';
 import { getData } from './api.js';
+import { debounce } from './filters.js';
+const RERENDER_DELAY = 500;
 import './filters.js';
-getData(onDataLoaded, onError);
+getData(debounce(onDataLoaded, RERENDER_DELAY), onError);
 validateForm();
 setOverlayForm();
 setScaleSizePhoto();

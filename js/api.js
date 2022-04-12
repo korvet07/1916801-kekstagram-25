@@ -24,7 +24,7 @@ export const getData = (onSuccess, onError) => {
       });
       return data;
     })
-    .then((photos) => onRenderRandomPhotos(() => {
+    .then((photos) => onRenderRandomPhotos( () => {
       window.console.log(photos);
       document.querySelectorAll('.picture').forEach((picture) => { picture.remove(); });
       const randomPhotos = photos.slice().sort(() => Math.random() - 0.5).slice(0, 10);
