@@ -19,7 +19,7 @@ export const renderPhotos = (items) => {
   });
   return container.append(elementFragment);
 };
-export const onDataLoaded = (data) => {
+export const dataLoaded = (data) => {
   renderPhotos(data);
   setOpenBigPhoto();
   setCloseBigPhoto();

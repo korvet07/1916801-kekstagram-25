@@ -1,9 +1,14 @@
-import { renderPhotos } from './render-photos.js';
+import { dataLoaded } from './render-photos.js';
 const SHOW_RANDOM_PHOTOS = 10;
 const RERENDER_DELAY = 500;
 const buttonDefault = document.querySelector('#filter-default');
 const buttonRandom = document.querySelector('#filter-random');
 const buttonDiscussed = document.querySelector('#filter-discussed');
+let timeoutId;
+const debounce = (fn, timeoutDelay) => {
+  clearTimeout(timeoutId);
+  timeoutId = setTimeout(() => fn(), timeoutDelay);
+};
 window.onload = () => {
   document.querySelector('.img-filters').classList.remove('img-filters--inactive');
 };
@@ -12,22 +17,22 @@ const onButtonClick = (evt) => {
   evt.target.classList.add('img-filters__button--active');
   document.querySelectorAll('.picture').forEach((picture) => picture.remove());
 };
-export const onAlternativeRenders = (data) => {
+export const rendersAlternative = (data) => {
   buttonDefault.addEventListener('click', (evt) => {
-    setTimeout(() => {
+    debounce(() => {
       onButtonClick(evt);
-      renderPhotos(data.slice());
+      dataLoaded(data.slice());
     }, RERENDER_DELAY);
   });
   buttonRandom.addEventListener('click', (evt) => {
-    setTimeout(() => {
+    debounce(() => {
       onButtonClick(evt);
       const randomPhotos = data.slice().sort(() => Math.random() - 0.5).slice(0, SHOW_RANDOM_PHOTOS);
-      renderPhotos(randomPhotos);
+      dataLoaded(randomPhotos);
     }, RERENDER_DELAY);
   });
   buttonDiscussed.addEventListener('click', (evt) => {
-    setTimeout(() => {
+    debounce(() => {
       onButtonClick(evt);
       const discussedPhotos = data.slice().sort((a, b) => {
         if (a.comments === b.comments) {
@@ -35,7 +40,7 @@ export const onAlternativeRenders = (data) => {
         }
         return a.comments < b.comments ? 1 : -1;
       });
-      renderPhotos(discussedPhotos);
+      dataLoaded(discussedPhotos);
     }, RERENDER_DELAY);
   });
 };
