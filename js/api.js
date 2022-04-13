@@ -1,10 +1,7 @@
-export const getData = (onSuccess, onError, onMoreSuccess) => {
+export const getData = (onSuccess, onError) => {
   fetch('https://25.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
-    .then((data) => {
-      onMoreSuccess(data);
-      onSuccess(data);
-    })
+    .then((data) => onSuccess(data))
     .catch(() => onError('Ошибка загрузки фото, перезагрузите страницу!'));
 };
 export const sendData = (body, onSendStatus, onFinally, onMoreAction, onSomeMoreAction) => {

@@ -4,7 +4,10 @@ import { setScaleSizePhoto, setScaleEffectsPhoto } from './set-effects-photo.js'
 import { onError } from './message.js';
 import { getData } from './api.js';
 import { rendersAlternative } from './filters.js';
-getData(dataLoaded, onError, rendersAlternative);
+getData((data) => {
+  dataLoaded(data);
+  rendersAlternative(data);
+}, onError);
 validateForm();
 setOverlayForm();
 setScaleSizePhoto();
