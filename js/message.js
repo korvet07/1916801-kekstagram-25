@@ -20,11 +20,11 @@ export const onSendStatus = (type) => {
 };
 export const onError = (message) => {
   const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = 100;
+  alertContainer.style.zIndex = '100';
   alertContainer.style.position = 'absolute';
-  alertContainer.style.left = 0;
-  alertContainer.style.top = 0;
-  alertContainer.style.right = 0;
+  alertContainer.style.left = '0';
+  alertContainer.style.top = '0';
+  alertContainer.style.right = '0';
   alertContainer.style.padding = '20px 5px';
   alertContainer.style.fontSize = '40px';
   alertContainer.style.textAlign = 'center';
