@@ -1,4 +1,4 @@
-import { dataLoad } from './render-photos.js';
+import { loadData } from './render-photos.js';
 const SHOW_RANDOM_PHOTOS = 10;
 const RERENDER_DELAY = 500;
 const buttonDefault = document.querySelector('#filter-default');
@@ -21,14 +21,14 @@ export const renderAlternative = (data) => {
   buttonDefault.addEventListener('click', (evt) => {
     debounce(() => {
       onButtonClick(evt);
-      dataLoad(data.slice());
+      loadData(data.slice());
     }, RERENDER_DELAY);
   });
   buttonRandom.addEventListener('click', (evt) => {
     debounce(() => {
       onButtonClick(evt);
       const randomPhotos = data.slice().sort(() => Math.random() - 0.5).slice(0, SHOW_RANDOM_PHOTOS);
-      dataLoad(randomPhotos);
+      loadData(randomPhotos);
     }, RERENDER_DELAY);
   });
   buttonDiscussed.addEventListener('click', (evt) => {
@@ -40,7 +40,7 @@ export const renderAlternative = (data) => {
         }
         return a.comments < b.comments ? 1 : -1;
       });
-      dataLoad(discussedPhotos);
+      loadData(discussedPhotos);
     }, RERENDER_DELAY);
   });
 };
