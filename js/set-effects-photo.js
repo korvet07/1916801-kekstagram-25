@@ -10,29 +10,26 @@ const inputEffectSepia = document.querySelector('#effect-sepia');
 const inputEffectPhobos = document.querySelector('#effect-phobos');
 const inputEffectHeat = document.querySelector('#effect-heat');
 const inputEffectMarvin = document.querySelector('#effect-marvin');
+const maxSizeDefault = 100;
+const stepEndMinSize = 25;
+const coefficientCorrectStyleValue = 0.01;
 export const setScaleSizePhoto = () => {
-  const stepEndMinSize = 25;
-  const maxSize = 100;
-  const coefficientCorrectStyleValue = 0.01;
   inputScaleSizePhoto.value = '100%';
   let valueSize = parseInt(inputScaleSizePhoto.value.match(/\d+/), 10);
   const setShowScale = () => {
     inputScaleSizePhoto.value = `${valueSize}%`;
-    imgUploadPreview.style.transform = `scale(${valueSize * coefficientCorrectStyleValue
-    })`;
+    imgUploadPreview.style.transform = `scale(${valueSize * coefficientCorrectStyleValue})`;
   };
   const onButtonSmallerSizeClick = () => {
-    if (valueSize === stepEndMinSize) {
-      setShowScale();
-    } else {
+    if (valueSize !== stepEndMinSize) {
       valueSize = valueSize - stepEndMinSize;
-      setShowScale();
-      return valueSize;
     }
+    setShowScale();
+    return valueSize;
   };
   buttonSmallerSize.addEventListener('click', onButtonSmallerSizeClick);
   const onButtonBiggerSizeClick = () => {
-    if (valueSize === maxSize) {
+    if (valueSize === maxSizeDefault) {
       setShowScale();
     } else {
       valueSize = valueSize + stepEndMinSize;
@@ -93,9 +90,9 @@ export const setScaleEffectsPhoto = () => {
   });
   const setScaleEffectNone = () => {
     if (inputEffectNone.checked) {
-      sliderElement.noUiSlider.set(100);
+      sliderElement.noUiSlider.set(maxSizeDefault);
       imgUploadPreview.setAttribute('style', `transform: scale(${inputScaleSizePhoto.value})`);
-      sliderElement.setAttribute('disabled', 'true');
+      sliderElement.setAttribute('disabled', 'disabled');
     }
   };
   setScaleEffectNone();

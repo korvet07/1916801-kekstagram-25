@@ -1,6 +1,8 @@
 import { onSendStatus } from './message.js';
 import { sendData } from './api.js';
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const sliderElement = document.querySelector('.effect-level__slider');
+const imgUploadPreview = document.querySelector('.img-upload__preview>img');
 const controllerForm = document.querySelector('#upload-file');
 const overlayForm = document.querySelector('.img-upload__overlay');
 const closeFormButton = document.querySelector('.img-upload__cancel');
@@ -8,6 +10,10 @@ const formAddedPhoto = document.querySelector('#upload-select-image');
 const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
 const commentsInput = formAddedPhoto.querySelector('.text__description');
 const submitButton = formAddedPhoto.querySelector('.img-upload__submit');
+const maxAmountHashtags = 20;
+const maxLengthHashtag = 5;
+const maxValueSize = 100;
+const maxLengthComment = 140;
 const pristine = new Pristine(formAddedPhoto, {
   classTo: 'form-upload__error',
   errorClass: 'img-upload__text--invalid',
@@ -20,11 +26,11 @@ const resetValueInputs = () => {
   hashtagsInput.value = '';
   commentsInput.value = '';
   pristine.validate();
-  document.querySelector('.effect-level__slider').noUiSlider.set(100);
+  sliderElement.noUiSlider.set(maxValueSize);
   document.querySelector('.scale__control--value').value = '100%';
-  document.querySelector('.img-upload__preview>img').setAttribute('style', 'transform: scale(100%)');
-  document.querySelector('.effect-level__slider').setAttribute('disabled', true);
-  document.querySelector('.img-upload__preview>img').className = 'effects__preview--none';
+  imgUploadPreview.setAttribute('style', 'transform: scale(100%)');
+  sliderElement.setAttribute('disabled', 'disabled');
+  imgUploadPreview.className = 'effects__preview--none';
 };
 const onControllerFormChange = () => {
   overlayForm.classList.remove('hidden');
@@ -34,7 +40,7 @@ const onControllerFormChange = () => {
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
   if (matches) {
-    document.querySelector('.img-upload__preview>img').src = URL.createObjectURL(file);
+    imgUploadPreview.src = URL.createObjectURL(file);
   }
 };
 const closeForm = () => {
@@ -59,12 +65,12 @@ const addListenerCloseButton = () => {
 const removeListenerCloseButton = () => {
   closeFormButton.removeEventListener('click', onCloseFormButtonClick);
 };
-const checkLengthString = () => commentsInput.value.length <= 140;
+const checkLengthString = () => commentsInput.value.length <= maxLengthComment;
 const checkLengthHashtag = () => {
   const hashtags = hashtagsInput.value.split(' ');
   const newHashtags = hashtags.map((hashtag) => hashtag.length);
   for (const newHashtag of newHashtags) {
-    if (+newHashtag > 20) {
+    if (+newHashtag > maxAmountHashtags) {
       return false;
     }
   }
@@ -84,7 +90,7 @@ const checkComparisonHashtags = () => {
 };
 const checkAmountHashtag = () => {
   const hashtags = hashtagsInput.value.split(' ');
-  return hashtags.length <= 5;
+  return hashtags.length <= maxLengthHashtag;
 };
 const blockSubmitButton = () => {
   submitButton.disabled = true;
