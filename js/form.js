@@ -1,6 +1,7 @@
 import { onSendStatus } from './message.js';
 import { sendData } from './api.js';
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const imgUploadPreview = document.querySelector('.img-upload__preview>img');
 const controllerForm = document.querySelector('#upload-file');
 const overlayForm = document.querySelector('.img-upload__overlay');
 const closeFormButton = document.querySelector('.img-upload__cancel');
@@ -22,9 +23,9 @@ const resetValueInputs = () => {
   pristine.validate();
   document.querySelector('.effect-level__slider').noUiSlider.set(100);
   document.querySelector('.scale__control--value').value = '100%';
-  document.querySelector('.img-upload__preview>img').setAttribute('style', 'transform: scale(100%)');
+  imgUploadPreview.setAttribute('style', 'transform: scale(100%)');
   document.querySelector('.effect-level__slider').setAttribute('disabled', true);
-  document.querySelector('.img-upload__preview>img').className = 'effects__preview--none';
+  imgUploadPreview.className = 'effects__preview--none';
 };
 const onControllerFormChange = () => {
   overlayForm.classList.remove('hidden');
@@ -34,7 +35,7 @@ const onControllerFormChange = () => {
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
   if (matches) {
-    document.querySelector('.img-upload__preview>img').src = URL.createObjectURL(file);
+    imgUploadPreview.src = URL.createObjectURL(file);
   }
 };
 const closeForm = () => {
