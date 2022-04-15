@@ -1,4 +1,4 @@
-import { renderBigPhoto, setOpenBigPhoto, setCloseBigPhoto } from './big-photo.js';
+import { renderBigPhoto, openBigPhoto, setCloseBigPhoto } from './big-photo.js';
 const template = document.querySelector('#picture').content.querySelector('.picture');
 const container = document.querySelector('.pictures');
 const elementFragment = document.createDocumentFragment();
@@ -7,6 +7,9 @@ const renderThumbnail = (item) => {
   thumbnail.querySelector('.picture__img').setAttribute('src', item.url);
   thumbnail.querySelector('.picture__likes').textContent = item.likes;
   thumbnail.querySelector('.picture__comments').textContent = item.comments.length;
+  thumbnail.addEventListener("click", () => {
+    openBigPhoto();
+  });
   return thumbnail;
 };
 export const renderPhotos = (items) => {
@@ -21,6 +24,6 @@ export const renderPhotos = (items) => {
 };
 export const loadData = (data) => {
   renderPhotos(data);
-  setOpenBigPhoto();
+
   setCloseBigPhoto();
 };
