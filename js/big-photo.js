@@ -4,6 +4,8 @@ const li = photo.querySelector('.social__comment');
 const buttonLoaderComments = document.querySelector('.comments-loader');
 const buttonCloseBigPhoto = photo.querySelector('#picture-cancel');
 const socialCommentsCount = document.querySelector('.social__comment-count');
+const hashtagsInput = document.querySelector('.text__hashtags');
+const commentsInput = document.querySelector('.text__description');
 const LIMIT_DISPLAYED_COMMENTS = 5;
 let offset = 0;
 const img = li.querySelector('img');
@@ -17,7 +19,7 @@ const openBigPhoto = () => {
   document.body.classList.add('modal-open');
 };
 const onBigPhotoEscKey = (evt) => {
-  if (evt.key === 'Escape') {
+  if (evt.key === 'Escape' && evt.target !== hashtagsInput && evt.target !== commentsInput) {
     evt.preventDefault();
     closeBigPhoto();
   }
