@@ -1,3 +1,4 @@
+const LIMIT_DISPLAYED_COMMENTS = 5;
 const photo = document.querySelector('.big-picture');
 const socialComments = photo.querySelector('.social__comments');
 const li = photo.querySelector('.social__comment');
@@ -6,7 +7,7 @@ const buttonCloseBigPhoto = photo.querySelector('#picture-cancel');
 const socialCommentsCount = document.querySelector('.social__comment-count');
 const hashtagsInput = document.querySelector('.text__hashtags');
 const commentsInput = document.querySelector('.text__description');
-const LIMIT_DISPLAYED_COMMENTS = 5;
+const thumbnails = document.querySelectorAll('.picture');
 let offset = 0;
 const img = li.querySelector('img');
 const textComment = document.querySelector('.social__text');
@@ -49,7 +50,6 @@ const renderContentComments = (item) => {
   buttonLoaderComments.classList.toggle('hidden', offset === item.comments.length);
 };
 export const setOpenBigPhoto = () => {
-  const thumbnails = document.querySelectorAll('.picture');
   thumbnails.forEach((thumbnail) => {
     thumbnail.addEventListener('click', () => {
       openBigPhoto();
