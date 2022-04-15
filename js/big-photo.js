@@ -1,10 +1,12 @@
+const LIMIT_DISPLAYED_COMMENTS = 5;
 const photo = document.querySelector('.big-picture');
 const socialComments = photo.querySelector('.social__comments');
 const li = photo.querySelector('.social__comment');
 const buttonLoaderComments = document.querySelector('.comments-loader');
 const buttonCloseBigPhoto = photo.querySelector('#picture-cancel');
 const socialCommentsCount = document.querySelector('.social__comment-count');
-const LIMIT_DISPLAYED_COMMENTS = 5;
+const hashtagsInput = document.querySelector('.text__hashtags');
+const commentsInput = document.querySelector('.text__description');
 let offset = 0;
 const img = li.querySelector('img');
 const textComment = document.querySelector('.social__text');
@@ -12,12 +14,12 @@ const closeBigPhoto = () => {
   photo.classList.add('hidden');
   document.body.classList.remove('modal-open');
 };
-const openBigPhoto = () => {
+export const openBigPhoto = () => {
   photo.classList.remove('hidden');
   document.body.classList.add('modal-open');
 };
 const onBigPhotoEscKey = (evt) => {
-  if (evt.key === 'Escape') {
+  if (evt.key === 'Escape' && evt.target !== hashtagsInput && evt.target !== commentsInput) {
     evt.preventDefault();
     closeBigPhoto();
   }
@@ -45,14 +47,6 @@ const renderContentComments = (item) => {
   offset = offset + item.comments.slice(offset, offset + LIMIT_DISPLAYED_COMMENTS).length;
   controlShowAmountComments(item);
   buttonLoaderComments.classList.toggle('hidden', offset === item.comments.length);
-};
-export const setOpenBigPhoto = () => {
-  const thumbnails = document.querySelectorAll('.picture');
-  thumbnails.forEach((thumbnail) => {
-    thumbnail.addEventListener('click', () => {
-      openBigPhoto();
-    });
-  });
 };
 export const setCloseBigPhoto = () => {
   if (!photo.matches('hidden')) {
