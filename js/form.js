@@ -96,7 +96,6 @@ const blockSubmitButton = () => {
   submitButton.disabled = true;
   submitButton.textContent = 'Публикация...';
 };
-
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
   submitButton.textContent = 'Опубликовать';
