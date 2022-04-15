@@ -8,12 +8,14 @@ export const onSendStatus = (type) => {
     document.querySelector(`.${type}`).remove();
   }, { once: true });
   document.addEventListener('keydown', (evt) => {
-    evt.preventDefault();
-    document.querySelector(`.${type}`).remove();
+    if (evt.key === 'Escape' && document.querySelector(`.${type}`)) {
+      evt.preventDefault();
+      document.querySelector(`.${type}`).remove();
+    }
   }, { once: true });
   document.addEventListener('click', (evt) => {
     const withinBoundaries = evt.composedPath().includes(popup);
-    if (!withinBoundaries) {
+    if (!withinBoundaries && document.querySelector(`.${type}`)) {
       document.querySelector(`.${type}`).remove();
     }
   }, { once: true });
