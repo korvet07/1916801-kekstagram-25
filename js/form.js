@@ -1,5 +1,6 @@
 import { onSendStatus } from './message.js';
 import { sendData } from './api.js';
+import { setScaleSizePhoto } from './set-effects-photo.js';
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const sliderElement = document.querySelector('.effect-level__slider');
 const imgUploadPreview = document.querySelector('.img-upload__preview>img');
@@ -27,10 +28,10 @@ const resetValueInputs = () => {
   commentsInput.value = '';
   pristine.validate();
   sliderElement.noUiSlider.set(maxValueSize);
-  document.querySelector('.scale__control--value').value = '100%';
   imgUploadPreview.setAttribute('style', 'transform: scale(100%)');
   sliderElement.setAttribute('disabled', 'disabled');
   imgUploadPreview.className = 'effects__preview--none';
+  setScaleSizePhoto();
 };
 const onControllerFormChange = () => {
   overlayForm.classList.remove('hidden');

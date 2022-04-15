@@ -24,6 +24,5 @@ export const renderPhotos = (items) => {
 };
 export const loadData = (data) => {
   renderPhotos(data);
-
   setCloseBigPhoto();
 };
