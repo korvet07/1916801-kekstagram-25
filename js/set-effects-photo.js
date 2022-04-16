@@ -1,20 +1,16 @@
 const MAX_SIZE_DEFAULT = 100;
 const STEP_END_MIN_SIZE = 25;
 const COEFFICIENT_CORRECT_STYLE_VALUE = 0.01;
-const MIN_VALUE_PHOBOS = 0;
 const MIN_VALUE_HEAT = 1;
 const MAX_VALUE_FOR_PHOBOS_HEAT = 3;
 const START_VALUE_FOR_PHOBOS_HEAT = 3;
 const STEP_VALUE_FOR_PHOBOS_HEAT = 0.1;
-const MIN_VALUE_FOR_CHROME_SEPIA = 0;
 const MAX_VALUE_FOR_CHROME_SEPIA = 1;
 const STEP_VALUE_FOR_CHROME_SEPIA = 0.1;
 const START_VALUE_FOR_CHROME_SEPIA = 1;
-const MIN_VALUE_FOR_SET_SCALE = 0;
 const MAX_VALUE_FOR_SET_SCALE = 1;
 const STEP_VALUE_FOR_SET_SCALE = 0.1;
 const START_VALUE_FOR_SET_SCALE = 1;
-const MIN_VALUE_FOR_MARVIN = 0;
 const MAX_VALUE_FOR_MARVIN = 100;
 const STEP_VALUE_FOR_MARVIN = 1;
 const START_VALUE_FOR_MARVIN = 100;
@@ -79,7 +75,7 @@ const updateOptionsForChromeSepia = () => {
   sliderElement.removeAttribute('disabled');
   sliderElement.noUiSlider.updateOptions({
     range: {
-      min: MIN_VALUE_FOR_CHROME_SEPIA,
+      min: 0,
       max: MAX_VALUE_FOR_CHROME_SEPIA,
     },
     start: START_VALUE_FOR_CHROME_SEPIA,
@@ -89,7 +85,7 @@ const updateOptionsForChromeSepia = () => {
 export const setScaleEffectsPhoto = () => {
   noUiSlider.create(sliderElement, {
     range: {
-      min: MIN_VALUE_FOR_SET_SCALE,
+      min: 0,
       max: MAX_VALUE_FOR_SET_SCALE,
     },
     start: START_VALUE_FOR_SET_SCALE,
@@ -143,7 +139,7 @@ export const setScaleEffectsPhoto = () => {
       sliderElement.removeAttribute('disabled');
       sliderElement.noUiSlider.updateOptions({
         range: {
-          min: MIN_VALUE_FOR_MARVIN,
+          min: 0,
           max: MAX_VALUE_FOR_MARVIN,
         },
         start: START_VALUE_FOR_MARVIN,
@@ -157,7 +153,7 @@ export const setScaleEffectsPhoto = () => {
   });
 
   inputEffectPhobos.addEventListener('change', (evt) => {
-    updateOptionsForPhobosHeat(evt, 'blur', 'px', MIN_VALUE_PHOBOS);
+    updateOptionsForPhobosHeat(evt, 'blur', 'px', 0);
   });
   inputEffectHeat.addEventListener('change', (evt) => {
     updateOptionsForPhobosHeat(evt, 'brightness');
