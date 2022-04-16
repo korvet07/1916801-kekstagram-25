@@ -1,6 +1,10 @@
 import { onSendStatus } from './message.js';
 import { sendData } from './api.js';
 import { setScaleSizePhoto } from './set-effects-photo.js';
+const MAX_AMOUNT_HASHTAGS = 20;
+const MAX_LENGTH_HASHTAG = 5;
+const MAX_VALUE_SIZE = 100;
+const MAX_LENGTH_COMMENT = 140;
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const sliderElement = document.querySelector('.effect-level__slider');
 const imgUploadPreview = document.querySelector('.img-upload__preview>img');
@@ -11,10 +15,6 @@ const formAddedPhoto = document.querySelector('#upload-select-image');
 const hashtagsInput = formAddedPhoto.querySelector('.text__hashtags');
 const commentsInput = formAddedPhoto.querySelector('.text__description');
 const submitButton = formAddedPhoto.querySelector('.img-upload__submit');
-const maxAmountHashtags = 20;
-const maxLengthHashtag = 5;
-const maxValueSize = 100;
-const maxLengthComment = 140;
 const pristine = new Pristine(formAddedPhoto, {
   classTo: 'form-upload__error',
   errorClass: 'img-upload__text--invalid',
@@ -27,11 +27,12 @@ const resetValueInputs = () => {
   hashtagsInput.value = '';
   commentsInput.value = '';
   pristine.validate();
-  sliderElement.noUiSlider.set(maxValueSize);
+  sliderElement.noUiSlider.set(MAX_VALUE_SIZE);
   document.querySelector('.scale__control--value').value = '100%';
   imgUploadPreview.setAttribute('style', 'transform: scale(100%)');
   sliderElement.setAttribute('disabled', 'disabled');
   imgUploadPreview.className = 'effects__preview--none';
+  document.querySelector('#effect-none').checked = true;
   setScaleSizePhoto();
 };
 const onControllerFormChange = () => {
@@ -49,7 +50,6 @@ const closeForm = () => {
   overlayForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
   controllerForm.value = '';
-  document.querySelector('#effect-none').checked = true;
 };
 const onCloseFormButtonClick = () => {
   closeForm();
@@ -66,12 +66,12 @@ const addListenerCloseButton = () => {
 const removeListenerCloseButton = () => {
   closeFormButton.removeEventListener('click', onCloseFormButtonClick);
 };
-const checkLengthString = () => commentsInput.value.length <= maxLengthComment;
+const checkLengthString = () => commentsInput.value.length <= MAX_LENGTH_COMMENT;
 const checkLengthHashtag = () => {
   const hashtags = hashtagsInput.value.split(' ');
   const newHashtags = hashtags.map((hashtag) => hashtag.length);
   for (const newHashtag of newHashtags) {
-    if (+newHashtag > maxAmountHashtags) {
+    if (+newHashtag > MAX_AMOUNT_HASHTAGS) {
       return false;
     }
   }
@@ -91,7 +91,7 @@ const checkComparisonHashtags = () => {
 };
 const checkAmountHashtag = () => {
   const hashtags = hashtagsInput.value.split(' ');
-  return hashtags.length <= maxLengthHashtag;
+  return hashtags.length <= MAX_LENGTH_HASHTAG;
 };
 const blockSubmitButton = () => {
   submitButton.disabled = true;
