@@ -16,6 +16,7 @@ export const onSendStatus = (type) => {
   document.addEventListener('click', (evt) => {
     const withinBoundaries = evt.composedPath().includes(popup);
     if (!withinBoundaries && document.querySelector(`.${type}`)) {
+      console.log('click')
       document.querySelector(`.${type}`).remove();
     }
   }, { once: true });
